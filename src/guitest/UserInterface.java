@@ -47,6 +47,8 @@ public class UserInterface implements ActionListener {
         search_keyword_button = new JButton ("Pesquisar por Sentença Chave");
         search_manager_button = new JButton ("Pesquisar por Gerente de Evento");
         search_table = new JTable(model);
+
+        search_table.setAutoCreateRowSorter(true);
     }
 
     public void showGUI () {
