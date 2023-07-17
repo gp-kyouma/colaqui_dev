@@ -1,0 +1,58 @@
+[
+  {
+    "nome": "Campeonato de PES",
+    "gerente": "DACOMP",
+    "local": "Sala de Convivência do DACOMP",
+    "horario": "Toda quarta 12:30",
+    "maxVagas": 8,
+    "vagasOcupadas": 0
+  },
+  {
+    "nome": "Campeonato de SF4",
+    "gerente": "DACOMP",
+    "local": "Sala de Convivência do DACOMP",
+    "horario": "Toda terça 13:30",
+    "maxVagas": 16,
+    "vagasOcupadas": 0
+  },
+  {
+    "nome": "Campeonato de OMK",
+    "gerente": "DACOMP",
+    "local": "Sala de Convivência do DACOMP",
+    "horario": "Toda quinta 13:30",
+    "maxVagas": 8,
+    "vagasOcupadas": 0
+  },
+  {
+    "nome": "Seminário de ES",
+    "gerente": "Prof. Galante",
+    "local": "Auditório Prof. Castilho",
+    "horario": "01/08/23 15:30",
+    "maxVagas": 10,
+    "vagasOcupadas": 0
+  },
+  {
+    "nome": "Seminário de FBD",
+    "gerente": "Prof. Galante",
+    "local": "Sala 112 Prédio 43425",
+    "horario": "27/07/23 17:30",
+    "maxVagas": 15,
+    "vagasOcupadas": 0
+  },
+  {
+    "nome": "Seminário de SF4",
+    "gerente": "DACOMP",
+    "local": "Sala de Convivência do DACOMP",
+    "horario": "03/08/23 10:30",
+    "maxVagas": 10,
+    "vagasOcupadas": 0
+  },
+  {
+    "nome": "Campeonato de Xadrez",
+    "gerente": "Prof. Nicolas",
+    "local": "Sala de Convivência do DACOMP",
+    "horario": "Toda segunda 12:30",
+    "maxVagas": 4,
+    "vagasOcupadas": 0
+  }
+]
