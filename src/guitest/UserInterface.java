@@ -31,7 +31,7 @@ public class UserInterface implements ActionListener {
         
         controller = new Controller();
         
-        frame = new JFrame ("ColAqui 0.1.1");
+        frame = new JFrame ("ColAqui 0.1.2");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //construct preComponents

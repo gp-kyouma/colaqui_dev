@@ -1,6 +1,5 @@
 package guitest;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -38,8 +37,13 @@ public class Controller {
         Gson gson = new Gson();
         
         String filename= "Eventos.json";
-        File fr = new File(filename);
-        String output = TextReader.ReadFileToText(fr);
+        String output = "";
+        try {
+            output = TextReader.readFileToString(filename);
+        } catch(Exception e){
+            e.printStackTrace();
+            System.exit(1);
+        }
         
         evento_data = gson.fromJson(output,TypeToken.getParameterized(ArrayList.class, Evento.class).getType());
     }
