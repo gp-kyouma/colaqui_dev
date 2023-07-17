@@ -1,7 +1,6 @@
 package guitest;
 
-// BIG PLACEHOLDER LOL
-// idk if this is what we'll use, but for search purposes it's good enough
+// NOT FINAL
 
 public class Evento {
 

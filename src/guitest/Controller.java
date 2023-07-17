@@ -1,6 +1,10 @@
 package guitest;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Controller {
 
@@ -12,8 +16,8 @@ public class Controller {
     {
         evento_data = new ArrayList<Evento>();
         
+        /*
         // placeholder: database hardcoded
-        // na aplicação final, isso vai ser carregamento de arquivo
         Evento e1 = new Evento("Campeonato de PES", "DACOMP", "Sala de Convivência do DACOMP", "Toda quarta 12:30", 8);
         Evento e2 = new Evento("Campeonato de SF4", "DACOMP", "Sala de Convivência do DACOMP", "Toda terça 13:30", 16);
         Evento e3 = new Evento("Campeonato de OMK", "DACOMP", "Sala de Convivência do DACOMP", "Toda quinta 13:30", 8);
@@ -29,6 +33,15 @@ public class Controller {
         evento_data.add(e5);
         evento_data.add(e6);
         evento_data.add(e7);
+        */
+
+        Gson gson = new Gson();
+        
+        String filename= "Eventos.json";
+        File fr = new File(filename);
+        String output = TextReader.ReadFileToText(fr);
+        
+        evento_data = gson.fromJson(output,TypeToken.getParameterized(ArrayList.class, Evento.class).getType());
     }
 
     public ArrayList<Evento> searchEventByKeyword(String key)
