@@ -1,40 +1,59 @@
 package model;
 
+import java.util.ArrayList;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 // NOT FINAL
 
 public class Evento {
 
-    // todo: event ID
-    private String nome; // aka display name
-    private String gerente; // placeholder, probably will be an user ID
+    private Integer id;
+    private String nome;        // aka display name do evento
+    private String gerenteAcct; // account name do gerente
+    private String gerenteNome; // display name do gerente
     private String local;
-    private String horario; // placeholder, probably will be DateTime or however it is in Java
-    // todo: split horario em data (LocalDate) e horario (LocalTime)
-    // todo: list of presences (IDs?)
+    private LocalDate data;
+    private LocalTime horario;
+    
+    private ArrayList<String> presencasConfirmadas;
 
     private Integer maxVagas;
-    private Integer vagasOcupadas;  // this will just be presencesList.length()
 
-    public Evento(String nome, String gerente, String local, String horario, Integer maxVagas)
+    public Evento(Integer id, String nome, String gerenteAcct, String gerenteNome, String local, LocalDate data, LocalTime horario, Integer maxVagas)
     {
+        this.id = id;
         this.nome = nome;
-        this.gerente = gerente;
+        this.gerenteAcct = gerenteAcct;
+        this.gerenteNome = gerenteNome;
         this.local = local;
+        this.data = data;
         this.horario = horario;
         this.maxVagas = maxVagas;
-        this.vagasOcupadas = 0;
+        this.presencasConfirmadas = new ArrayList<String>();
     }
 
     //todo: setters
+
+    public Integer getID()
+    {
+        return id;
+    }
 
     public String getNome()
     {
         return nome;
     }
 
+    public String getGerenteAcct()
+    {
+        return gerenteAcct;
+    }
+
     public String getGerente()
     {
-        return gerente;
+        return gerenteNome;
     }
 
     public String getLocal()
@@ -42,7 +61,12 @@ public class Evento {
         return local;
     }
 
-    public String getHorario()
+    public LocalDate getData()
+    {
+        return data;
+    }
+
+    public LocalTime getHorario()
     {
         return horario;
     }
@@ -54,11 +78,13 @@ public class Evento {
 
     public Integer getVagasOcupadas()
     {
-        return vagasOcupadas;
+        return presencasConfirmadas.size();
     }
 
     public Integer getVagasDisponiveis()
     {
-        return (maxVagas - vagasOcupadas);
+        return (maxVagas - presencasConfirmadas.size());
     }
+
+    //todo: add presença, remove presença, etc.
 }

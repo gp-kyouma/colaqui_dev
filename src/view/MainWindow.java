@@ -18,7 +18,7 @@ public class MainWindow {
 
     public MainWindow(Model model) {
         
-        frame = new JFrame ("ColAqui 0.1.2.1");
+        frame = new JFrame ("ColAqui 0.1.2.2");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         user_actions_panel = new UserActionsPanel(this);
@@ -32,7 +32,7 @@ public class MainWindow {
 
         Container pane = frame.getContentPane();
 
-        // will become login panel (when that becomes a thing that exists)
+        // initial left panel will be login panel (when that becomes a thing that exists)
         pane.add(user_actions_panel,BorderLayout.LINE_START);
         pane.add(empty_panel,BorderLayout.CENTER);
 

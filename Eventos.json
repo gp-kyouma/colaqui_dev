@@ -1,58 +1,79 @@
 [
   {
+    "id": 1,
     "nome": "Campeonato de PES",
-    "gerente": "DACOMP",
+    "gerenteAcct": "dacomp",
+    "gerenteNome": "DACOMP",
     "local": "Sala de Convivência do DACOMP",
-    "horario": "Toda quarta 12:30",
-    "maxVagas": 8,
-    "vagasOcupadas": 0
+    "data": "09/08/2023",
+    "horario": "12:30",
+    "presencasConfirmadas": [],
+    "maxVagas": 8
   },
   {
+    "id": 2,
     "nome": "Campeonato de SF4",
-    "gerente": "DACOMP",
+    "gerenteAcct": "dacomp",
+    "gerenteNome": "DACOMP",
     "local": "Sala de Convivência do DACOMP",
-    "horario": "Toda terça 13:30",
-    "maxVagas": 16,
-    "vagasOcupadas": 0
+    "data": "08/08/2023",
+    "horario": "13:30",
+    "presencasConfirmadas": [],
+    "maxVagas": 16
   },
   {
+    "id": 3,
     "nome": "Campeonato de OMK",
-    "gerente": "DACOMP",
+    "gerenteAcct": "dacomp",
+    "gerenteNome": "DACOMP",
     "local": "Sala de Convivência do DACOMP",
-    "horario": "Toda quinta 13:30",
-    "maxVagas": 8,
-    "vagasOcupadas": 0
+    "data": "10/08/2023",
+    "horario": "13:30",
+    "presencasConfirmadas": [],
+    "maxVagas": 8
   },
   {
+    "id": 4,
     "nome": "Seminário de ES",
-    "gerente": "Prof. Galante",
+    "gerenteAcct": "galante",
+    "gerenteNome": "Prof. Galante",
     "local": "Auditório Prof. Castilho",
-    "horario": "01/08/23 15:30",
-    "maxVagas": 10,
-    "vagasOcupadas": 0
+    "data": "01/08/2023",
+    "horario": "15:30",
+    "presencasConfirmadas": [],
+    "maxVagas": 10
   },
   {
+    "id": 5,
     "nome": "Seminário de FBD",
-    "gerente": "Prof. Galante",
+    "gerenteAcct": "galante",
+    "gerenteNome": "Prof. Galante",
     "local": "Sala 112 Prédio 43425",
-    "horario": "27/07/23 17:30",
-    "maxVagas": 15,
-    "vagasOcupadas": 0
+    "data": "27/07/2023",
+    "horario": "17:30",
+    "presencasConfirmadas": [],
+    "maxVagas": 15
   },
   {
+    "id": 6,
     "nome": "Seminário de SF4",
-    "gerente": "DACOMP",
+    "gerenteAcct": "dacomp",
+    "gerenteNome": "DACOMP",
     "local": "Sala de Convivência do DACOMP",
-    "horario": "03/08/23 10:30",
-    "maxVagas": 10,
-    "vagasOcupadas": 0
+    "data": "03/08/2023",
+    "horario": "10:30",
+    "presencasConfirmadas": [],
+    "maxVagas": 10
   },
   {
+    "id": 7,
     "nome": "Campeonato de Xadrez",
-    "gerente": "Prof. Nicolas",
+    "gerenteAcct": "nicolas",
+    "gerenteNome": "Prof. Nicolas",
     "local": "Sala de Convivência do DACOMP",
-    "horario": "Toda segunda 12:30",
-    "maxVagas": 4,
-    "vagasOcupadas": 0
+    "data": "07/08/2023",
+    "horario": "12:30",
+    "presencasConfirmadas": [],
+    "maxVagas": 4
   }
 ]

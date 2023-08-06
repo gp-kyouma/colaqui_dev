@@ -4,6 +4,9 @@ package view;
 // https://pt.stackoverflow.com/questions/121513/como-popular-uma-jtable-com-tablemodel-pr%C3%B3prio
 
 import javax.swing.table.AbstractTableModel;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import model.Evento;
@@ -11,15 +14,16 @@ import model.Evento;
 public class SearchEventTableModel extends AbstractTableModel {
 
     // add +1 column to split date and time
-    private String colunas[] = {"Nome", "Gerente", "Local", "Horário", "Vagas ocupadas", "Vagas disponíveis", "Vagas totais"};
+    private String colunas[] = {"Nome", "Gerente", "Local", "Data", "Horário", "Vagas ocupadas", "Vagas disponíveis", "Vagas totais"};
     private ArrayList<Evento> searchResults;
     private final int COLUNA_NOME = 0;
     private final int COLUNA_GERENTE = 1;
     private final int COLUNA_LOCAL = 2;
-    private final int COLUNA_HORARIO = 3;
-    private final int COLUNA_OCUPADAS = 4;
-    private final int COLUNA_DISPONIVEIS = 5;
-    private final int COLUNA_TOTAIS = 6;
+    private final int COLUNA_DATA = 3;
+    private final int COLUNA_HORARIO = 4;
+    private final int COLUNA_OCUPADAS = 5;
+    private final int COLUNA_DISPONIVEIS = 6;
+    private final int COLUNA_TOTAIS = 7;
 
     public SearchEventTableModel(ArrayList<Evento> searchResults) {
         this.searchResults = searchResults;
@@ -57,8 +61,10 @@ public class SearchEventTableModel extends AbstractTableModel {
                 return String.class;
             case COLUNA_GERENTE:
                 return String.class;
+            case COLUNA_DATA:
+                return LocalDate.class;
             case COLUNA_HORARIO:
-                return String.class;
+                return LocalTime.class;
             case COLUNA_LOCAL:
                 return String.class;
             case COLUNA_OCUPADAS:
@@ -82,6 +88,8 @@ public class SearchEventTableModel extends AbstractTableModel {
                 return result.getNome();
             case COLUNA_GERENTE:
                 return result.getGerente();
+            case COLUNA_DATA:
+                return result.getData();
             case COLUNA_HORARIO:
                 return result.getHorario();
             case COLUNA_LOCAL:
