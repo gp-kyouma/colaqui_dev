@@ -60,9 +60,15 @@
     "isAdmin": false,
     "meusEventos": [],
     "eventosConfirmados": [
+      2,
+      6,
+      7,
       3
     ],
     "eventosSalvos": [
+      2,
+      6,
+      7,
       3
     ]
   }

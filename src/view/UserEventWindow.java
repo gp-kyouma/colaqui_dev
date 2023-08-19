@@ -13,9 +13,8 @@ import model.Evento;
 import model.Model;
 import model.Usuario;
 
-public class UserEventWindow implements ActionListener, WindowListener {
-    private JFrame frame;
-
+public class UserEventWindow extends SecondaryWindow implements ActionListener, WindowListener {
+    
     private JPanel panel;
 
     private Evento evento;
@@ -23,7 +22,7 @@ public class UserEventWindow implements ActionListener, WindowListener {
 
     private JLabel nome_evento;
     private JLabel nome_gerente;
-    private JTextField descricao;
+    private JTextArea descricao;
     private JLabel local;
     private JLabel data;
     private JLabel horario;
@@ -54,7 +53,7 @@ public class UserEventWindow implements ActionListener, WindowListener {
 
         nome_evento = new JLabel (evento.getNome());
         nome_gerente = new JLabel (String.format("Gerente do evento: %s", evento.getGerente()));
-        descricao = new JTextField (evento.getDescricao());
+        descricao = new JTextArea (evento.getDescricao());
         local = new JLabel (String.format("Local: %s", evento.getLocal()));
         data = new JLabel (String.format("Data: %s", data_formatter.format(evento.getData())));
         horario = new JLabel(String.format("Horário: %s", hora_formatter.format(evento.getHorario())));
@@ -62,13 +61,40 @@ public class UserEventWindow implements ActionListener, WindowListener {
         vagas_restantes = new JLabel(String.format("Vagas disponíveis: %d", evento.getVagasDisponiveis()));
         avaliacao_media = new JLabel(String.format("Avaliação média: %.2f", evento.getMediaAvaliacoes()));
 
-        presenca_button = new JButton("Marcar/Desmarcar Presença");
+        presenca_button = new JButton();
         avaliar_button = new JButton("Avaliar Evento");
         denunciar_button = new JButton("Denunciar Evento");
-        salvar_button = new JButton("Salvar Evento");
+        salvar_button = new JButton();
         compartilhar_button = new JButton("Compartilhar Evento");
+
+        // determina ação inicial dos botões de marcar/desmarcar presença e salvar
+        if (evento.confirmouPresenca(model.getLoggedUser().getCartao()))
+        {
+            presenca_button.setActionCommand("Desmarcar Presença");
+            presenca_button.setText("Desmarcar Presença");
+        }
+        else
+        {
+            presenca_button.setActionCommand("Marcar Presença");
+            presenca_button.setText("Marcar Presença");
+        }
+
+        if (model.getLoggedUser().eventoEstaSalvo(evento.getID()))
+        {
+            salvar_button.setActionCommand("Remover Evento Salvo");
+            salvar_button.setText("Remover Evento Salvo");
+        }
+        else
+        {
+            salvar_button.setActionCommand("Salvar Evento");
+            salvar_button.setText("Salvar Evento");
+        }
         
         avaliacao_nota = new JSlider(0,10,5);
+        avaliacao_nota.setMajorTickSpacing(1);
+        avaliacao_nota.setSnapToTicks(true);
+        avaliacao_nota.setPaintTicks(true);
+        avaliacao_nota.setPaintLabels(true);
 
         presenca_button.addActionListener(this);
         avaliar_button.addActionListener(this);
@@ -77,66 +103,102 @@ public class UserEventWindow implements ActionListener, WindowListener {
         compartilhar_button.addActionListener(this);
 
         descricao.setEditable(false);
+        descricao.setColumns(20);
+        descricao.setRows(5);
+        descricao.setLineWrap(true);
+        descricao.setWrapStyleWord(true);
 
         frame.addWindowListener(this);
 
+        panel.setPreferredSize(new Dimension (640, 480));
+
+        // formatação da UI
+        JPanel new_line_1 = new JPanel();
+        JPanel new_line_2 = new JPanel();
+        JPanel new_line_3 = new JPanel();
+        JPanel new_line_4 = new JPanel();
+        JPanel new_line_5 = new JPanel();
+        JPanel new_line_6 = new JPanel();
+        JPanel new_line_7 = new JPanel();
+        JPanel new_line_8 = new JPanel();
+        JPanel new_line_9 = new JPanel();
+
+        new_line_1.setPreferredSize(new Dimension (640, 1));
+        new_line_2.setPreferredSize(new Dimension (640, 1));
+        new_line_3.setPreferredSize(new Dimension (640, 1));
+        new_line_4.setPreferredSize(new Dimension (640, 1));
+        new_line_5.setPreferredSize(new Dimension (640, 1));
+        new_line_6.setPreferredSize(new Dimension (640, 1));
+        new_line_7.setPreferredSize(new Dimension (640, 1));
+        new_line_8.setPreferredSize(new Dimension (640, 1));
+        new_line_9.setPreferredSize(new Dimension (640, 1));
+
         panel.add(nome_evento);
+        panel.add(new_line_1);
+
         panel.add(nome_gerente);
+        panel.add(new_line_2);
+
         panel.add(descricao);
+        panel.add(new_line_3);
+
         panel.add(local);
+        panel.add(new_line_4);
+
         panel.add(data);
         panel.add(horario);
+        panel.add(new_line_5);
+
         panel.add(vagas_totais);
         panel.add(vagas_restantes);
+        panel.add(new_line_6);
+
         panel.add(avaliacao_media);
+        panel.add(new_line_7);
         
         panel.add(presenca_button);
-        panel.add(avaliar_button);
-        panel.add(denunciar_button);
         panel.add(salvar_button);
-        panel.add(compartilhar_button);
+        panel.add(new_line_8);
 
         panel.add(avaliacao_nota);
+        panel.add(avaliar_button);
+        panel.add(new_line_9);
 
-        panel.setPreferredSize(new Dimension (640, 480));
-        //todo: fix UI formatting
-    }
-
-    public void show() {
+        panel.add(denunciar_button);
+        panel.add(compartilhar_button);
 
         Container pane = frame.getContentPane();
 
         pane.add(panel);
-
-        frame.pack();
-        frame.setVisible (true);
-        frame.setResizable(false);
     }
 
     public void actionPerformed(ActionEvent e)
     {
         String s = e.getActionCommand();
         Usuario logado = model.getLoggedUser();
-        if (s.equals("Marcar/Desmarcar Presença")) {
-            if (evento.confirmouPresenca(logado.getCartao()))
-            {
-                // está marcado, desmarcar
-                evento.removePresenca(logado.getCartao());
-                logado.removePresenca(evento.getID());
-                JOptionPane.showMessageDialog(null, "Presença desmarcada!");
-            }
+        if (s.equals("Marcar Presença"))
+        {
+            // está desmarcado, marcar
+            boolean result = evento.addPresenca(logado.getCartao());
+            if (!result) // passou do limite de vagas
+                JOptionPane.showMessageDialog(null, "Evento lotado! Pedido de presença salvo.");
             else
             {
-                // está desmarcado, marcar
-                boolean result = evento.addPresenca(logado.getCartao());
-                if (!result) // passou do limite
-                    JOptionPane.showMessageDialog(null, "Evento lotado! Pedido de presença salvo.");
-                else
-                {
-                    logado.addPresenca(evento.getID());
-                    JOptionPane.showMessageDialog(null, "Presença marcada!");
-                }
+                logado.addPresenca(evento.getID());
+                JOptionPane.showMessageDialog(null, "Presença marcada!");
+
+                presenca_button.setActionCommand("Desmarcar Presença");
+                presenca_button.setText("Desmarcar Presença");
             }
+        }
+        else if (s.equals("Desmarcar Presença")) {
+            // está marcado, desmarcar
+            evento.removePresenca(logado.getCartao());
+            logado.removePresenca(evento.getID());
+            JOptionPane.showMessageDialog(null, "Presença desmarcada!");
+
+            presenca_button.setActionCommand("Marcar Presença");
+            presenca_button.setText("Marcar Presença");
         }
         else if (s.equals("Avaliar Evento")) {
             int nota = avaliacao_nota.getValue(); 
@@ -152,10 +214,18 @@ public class UserEventWindow implements ActionListener, WindowListener {
                 JOptionPane.showMessageDialog(null, "Você já denunciou esse evento.");
         }
         else if (s.equals("Salvar Evento")) {
-            if (logado.salvaEvento(evento.getID()))
-                JOptionPane.showMessageDialog(null, "Evento salvo!");
-            else
-                JOptionPane.showMessageDialog(null, "Você já salvou esse evento!");
+            logado.salvaEvento(evento.getID());
+            JOptionPane.showMessageDialog(null, "Evento salvo!");
+
+            salvar_button.setActionCommand("Remover Evento Salvo");
+            salvar_button.setText("Remover Evento Salvo");
+        }
+        else if (s.equals("Remover Evento Salvo")) {
+            logado.removeEventoSalvo(evento.getID());
+            JOptionPane.showMessageDialog(null, "Evento removido da lista de salvos!");
+
+            salvar_button.setActionCommand("Salvar Evento");
+            salvar_button.setText("Salvar Evento");
         }
         else if (s.equals("Compartilhar Evento")) {
             DateTimeFormatter data_formatter = DateTimeFormatter.ofPattern("dd/LL/yyyy");

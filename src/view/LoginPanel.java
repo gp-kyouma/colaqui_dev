@@ -43,8 +43,8 @@ public class LoginPanel extends JPanel implements ActionListener {
 
         setPreferredSize(new Dimension (200, 480));
 
-        JLabel empty_line = new JLabel(""); // pra ficar em linhas diferentes os botões
-        empty_line.setPreferredSize(new Dimension(3000,0));
+        JPanel empty_line = new JPanel(); // pra ficar em linhas diferentes os botões
+        empty_line.setPreferredSize(new Dimension(200,0));
 
         add(cartao_label);
         add(cartao_box);

@@ -14,8 +14,10 @@
     "avaliaram": [],
     "numAvaliacoes": 0,
     "totalAvaliacoes": 0,
-    "denunciaram": [],
-    "numDenuncias": 0
+    "denunciaram": [
+      123321
+    ],
+    "numDenuncias": 1
   },
   {
     "id": 2,
@@ -26,12 +28,16 @@
     "local": "Sala de Convivência do DACOMP",
     "data": "08/08/2023",
     "horario": "13:30",
-    "presencasConfirmadas": [],
+    "presencasConfirmadas": [
+      123321
+    ],
     "presencasExcedentes": [],
     "maxVagas": 16,
-    "avaliaram": [],
-    "numAvaliacoes": 0,
-    "totalAvaliacoes": 0,
+    "avaliaram": [
+      123321
+    ],
+    "numAvaliacoes": 1,
+    "totalAvaliacoes": 10,
     "denunciaram": [],
     "numDenuncias": 0
   },
@@ -54,8 +60,10 @@
     ],
     "numAvaliacoes": 1,
     "totalAvaliacoes": 10,
-    "denunciaram": [],
-    "numDenuncias": 0
+    "denunciaram": [
+      123321
+    ],
+    "numDenuncias": 1
   },
   {
     "id": 4,
@@ -102,12 +110,16 @@
     "local": "Sala de Convivência do DACOMP",
     "data": "03/08/2023",
     "horario": "10:30",
-    "presencasConfirmadas": [],
+    "presencasConfirmadas": [
+      123321
+    ],
     "presencasExcedentes": [],
     "maxVagas": 10,
-    "avaliaram": [],
-    "numAvaliacoes": 0,
-    "totalAvaliacoes": 0,
+    "avaliaram": [
+      123321
+    ],
+    "numAvaliacoes": 1,
+    "totalAvaliacoes": 9,
     "denunciaram": [],
     "numDenuncias": 0
   },
@@ -120,12 +132,16 @@
     "local": "Sala de Convivência do DACOMP",
     "data": "07/08/2023",
     "horario": "12:30",
-    "presencasConfirmadas": [],
+    "presencasConfirmadas": [
+      123321
+    ],
     "presencasExcedentes": [],
     "maxVagas": 4,
-    "avaliaram": [],
-    "numAvaliacoes": 0,
-    "totalAvaliacoes": 0,
+    "avaliaram": [
+      123321
+    ],
+    "numAvaliacoes": 1,
+    "totalAvaliacoes": 8,
     "denunciaram": [],
     "numDenuncias": 0
   }

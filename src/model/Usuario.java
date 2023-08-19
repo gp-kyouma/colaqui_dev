@@ -85,7 +85,7 @@ public class Usuario {
         eventosConfirmados.remove(eventID);
     }
 
-    public boolean ehMeuEvento(Integer eventID)
+    public boolean isMeuEvento(Integer eventID)
     {
         return meusEventos.contains(eventID);
     }
@@ -94,7 +94,7 @@ public class Usuario {
     // senão retorna false
     public boolean addMeuEvento(Integer eventID)
     {
-        if (ehMeuEvento(eventID))
+        if (isMeuEvento(eventID))
             return false;   // não adiciona o mesmo evento múltiplas vezes
         
         meusEventos.add(eventID);

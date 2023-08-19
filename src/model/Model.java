@@ -2,9 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import util.JsonManip;
 
 public class Model {

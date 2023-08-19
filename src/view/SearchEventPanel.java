@@ -10,11 +10,13 @@ import controller.SearchEventController;
 import model.Evento;
 import model.Model;
 
-public class SearchEventPanel extends JPanel implements ActionListener {
+public class SearchEventPanel extends JPanel implements ActionListener, MouseListener {
 
     private SearchEventController controller;
 
-    private UserEventWindow event_window;
+    private Model model;
+
+    private SecondaryWindow event_window;
     
     private JTextField search_text_box;
     private JButton search_keyword_button;
@@ -26,6 +28,7 @@ public class SearchEventPanel extends JPanel implements ActionListener {
     public SearchEventPanel(Model model) {
 
         controller = new SearchEventController(model);
+        this.model = model;
 
         event_window = null;
 
@@ -42,22 +45,7 @@ public class SearchEventPanel extends JPanel implements ActionListener {
         search_keyword_button.addActionListener(this);
         search_manager_button.addActionListener(this);
 
-        search_table.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                JTable table = (JTable) mouseEvent.getSource();
-                Point point = mouseEvent.getPoint();
-                int row = table.rowAtPoint(point);
-                SearchEventTableModel tmodel = (SearchEventTableModel)table.getModel();
-
-                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    Evento result = tmodel.getSearchResults().get(row);
-                    // todo: abrir janelas diferentes dependendo se for admin, criador...
-                    event_window = new UserEventWindow(result, model);
-                    event_window.show();
-                    // this is bullshit probably
-                }
-            }
-        });
+        search_table.addMouseListener(this);
 
         setPreferredSize(new Dimension (600, 480));
 
@@ -89,4 +77,31 @@ public class SearchEventPanel extends JPanel implements ActionListener {
             tableModel.setSearchResults(searchResults);
         }
     }
+
+    public void mousePressed(MouseEvent mouseEvent) {
+        Point point = mouseEvent.getPoint();
+        int row = search_table.rowAtPoint(point);
+
+        if (mouseEvent.getClickCount() == 2 && search_table.getSelectedRow() != -1) {
+            Evento result = tableModel.getSearchResults().get(row);
+
+            if ((event_window != null) && (event_window.isVisible()))
+                event_window.close(); // se tem uma janela já aberta, fecha
+
+            if (model.getLoggedUser().isAdmin())
+                event_window = new UserEventWindow(result, model);//change to AdminEventWindow when that exists
+            else if (model.getLoggedUser().isMeuEvento(result.getID()))
+                event_window = new UserEventWindow(result, model);//change to ManagerEventWindow when that exists
+            else
+                event_window = new UserEventWindow(result, model);
+            
+            event_window.show();
+        }
+    }
+
+    //unused
+    public void mouseClicked(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
 }
