@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Evento {
@@ -114,6 +115,12 @@ public class Evento {
     public Integer getNumDenuncias()
     {
         return numDenuncias;
+    }
+
+    // retorna se o evento não ocorreu ainda (está no futuro)
+    public boolean isAtivo()
+    {
+        return LocalDateTime.of(getData(), getHorario()).isAfter(LocalDateTime.now());
     }
 
     public ArrayList<Integer> getPresencasConfirmadas()

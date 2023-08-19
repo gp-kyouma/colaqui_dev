@@ -18,7 +18,7 @@ public class LoginPanel extends JPanel implements ActionListener {
     private JButton user_register_button;
 
     private JTextField cartao_box;
-    private JTextField password_box;
+    private JPasswordField password_box;
     
     private JLabel cartao_label;
     private JLabel password_label;
@@ -34,7 +34,7 @@ public class LoginPanel extends JPanel implements ActionListener {
         login_button = new JButton("Fazer Login");
 
         cartao_box = new JTextField (10);
-        password_box = new JTextField (10);
+        password_box = new JPasswordField (10);
         cartao_label = new JLabel ("Cartão:");
         password_label = new JLabel ("Senha:");
 
@@ -64,7 +64,7 @@ public class LoginPanel extends JPanel implements ActionListener {
         }
         else if (s.equals("Fazer Login")){
             String entered_cartao = cartao_box.getText();
-            String entered_password = password_box.getText();
+            String entered_password = new String(password_box.getPassword());
 
             if (entered_cartao.equals(""))
             {
@@ -100,9 +100,9 @@ public class LoginPanel extends JPanel implements ActionListener {
             window.updateCenterPanel("<Vazio>");
 
             if (model.getLoggedUser().isAdmin())
-                window.updateSidePanel("ADMIN_PANEL");
+                window.updateSidePanel("ADMIN_PANEL",model.getLoggedUser().getNome());
             else
-                window.updateSidePanel("USER_PANEL");
+                window.updateSidePanel("USER_PANEL",model.getLoggedUser().getNome());
         }
     }
 }

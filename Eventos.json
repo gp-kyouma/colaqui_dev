@@ -92,12 +92,16 @@
     "local": "Sala 112 Prédio 43425",
     "data": "27/07/2023",
     "horario": "17:30",
-    "presencasConfirmadas": [],
+    "presencasConfirmadas": [
+      111111
+    ],
     "presencasExcedentes": [],
     "maxVagas": 15,
-    "avaliaram": [],
-    "numAvaliacoes": 0,
-    "totalAvaliacoes": 0,
+    "avaliaram": [
+      111111
+    ],
+    "numAvaliacoes": 1,
+    "totalAvaliacoes": 7,
     "denunciaram": [],
     "numDenuncias": 0
   },
@@ -142,6 +146,24 @@
     ],
     "numAvaliacoes": 1,
     "totalAvaliacoes": 8,
+    "denunciaram": [],
+    "numDenuncias": 0
+  },
+  {
+    "id": 8,
+    "nome": "Festa do Zezito",
+    "gerenteCartao": 111111,
+    "gerenteNome": "Zezito",
+    "descricao": "Festa legal na casa do Zezito",
+    "local": "Casa do Zezito",
+    "data": "03/10/2023",
+    "horario": "18:00",
+    "presencasConfirmadas": [],
+    "presencasExcedentes": [],
+    "maxVagas": 5,
+    "avaliaram": [],
+    "numAvaliacoes": 0,
+    "totalAvaliacoes": 0,
     "denunciaram": [],
     "numDenuncias": 0
   }
