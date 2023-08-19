@@ -8,6 +8,8 @@ import java.time.LocalTime;
 
 public class Evento {
 
+    public static int MUITAS_DENUNCIAS = 3;
+    
     private Integer id;
     private String nome;        // aka display name do evento
     private Integer gerenteCartao; // cartão do gerente
@@ -27,7 +29,7 @@ public class Evento {
     private Integer totalAvaliacoes;
 
     private ArrayList<Integer> denunciaram; // pessoas que já denunciaram esse evento
-    private Integer numDenuncias;
+    private ArrayList<String> denuncias;
 
     public Evento(Integer id, String nome, Integer gerenteCartao, String gerenteNome, String descricao, String local, LocalDate data, LocalTime horario, Integer maxVagas)
     {
@@ -46,7 +48,7 @@ public class Evento {
         this.numAvaliacoes = 0;
         this.totalAvaliacoes = 0;
         this.denunciaram = new ArrayList<Integer>();
-        this.numDenuncias = 0;
+        this.denuncias = new ArrayList<String>();
     }
 
     public Integer getID()
@@ -114,7 +116,12 @@ public class Evento {
 
     public Integer getNumDenuncias()
     {
-        return numDenuncias;
+        return denuncias.size();
+    }
+
+    public ArrayList<String> getDenuncias()
+    {
+        return denuncias;
     }
 
     // retorna se o evento não ocorreu ainda (está no futuro)
@@ -174,6 +181,11 @@ public class Evento {
         presencasConfirmadas.remove(userID);
     }
 
+    public void removePresencaExcedente(Integer userID)
+    {
+        presencasExcedentes.remove(userID);
+    }
+
     public void addPresencaExcedente(Integer userID)
     {
         presencasExcedentes.remove(userID);
@@ -195,13 +207,18 @@ public class Evento {
 
     // retorna true se conseguiu adicionar denúncia com sucesso,
     // senão retorna false
-    public boolean addDenuncia(Integer userID)
+    public boolean addDenuncia(Integer userID, String denuncia)
     {
         if (denunciaram.contains(userID))
             return false;   // mesmo usuário não deve poder denunciar múltiplas vezes
         
         denunciaram.add(userID);
-        numDenuncias++;
+        denuncias.add(denuncia);
         return true;
+    }
+
+    public void removeDenuncia(String denuncia)
+    {
+        denuncias.remove(denuncia);
     }
 }

@@ -12,16 +12,8 @@
       9
     ],
     "eventosConfirmados": [],
-    "eventosSalvos": []
-  },
-  {
-    "cartao": 10,
-    "nome": "Joï¿½o Oppenheimer",
-    "senha": "lebomb",
-    "isAdmin": false,
-    "meusEventos": [],
-    "eventosConfirmados": [],
-    "eventosSalvos": []
+    "eventosSalvos": [],
+    "notificacoes": []
   },
   {
     "cartao": 11,
@@ -30,7 +22,8 @@
     "isAdmin": false,
     "meusEventos": [],
     "eventosConfirmados": [],
-    "eventosSalvos": []
+    "eventosSalvos": [],
+    "notificacoes": []
   },
   {
     "cartao": 999,
@@ -39,32 +32,44 @@
     "isAdmin": true,
     "meusEventos": [],
     "eventosConfirmados": [],
-    "eventosSalvos": []
+    "eventosSalvos": [],
+    "notificacoes": [
+      {
+        "notificacao": "O evento Festa do Zezito recebeu múltiplas denúncias.",
+        "time": "19/08/2023"
+      }
+    ]
   },
   {
     "cartao": 5,
     "nome": "Sandra Pereira",
     "senha": "123456789",
     "isAdmin": false,
-    "meusEventos": [],
+    "meusEventos": [
+      12
+    ],
     "eventosConfirmados": [],
-    "eventosSalvos": []
+    "eventosSalvos": [],
+    "notificacoes": []
   },
   {
-    "cartao": 5,
-    "nome": "claudio Gomes",
+    "cartao": 6,
+    "nome": "Claudio Gomes",
     "senha": "biruleibe",
     "isAdmin": false,
     "meusEventos": [],
     "eventosConfirmados": [],
-    "eventosSalvos": []
+    "eventosSalvos": [],
+    "notificacoes": []
   },
   {
     "cartao": 123321,
     "nome": "Jorisnelson Da Silvassauro",
     "senha": "epic",
     "isAdmin": false,
-    "meusEventos": [],
+    "meusEventos": [
+      11
+    ],
     "eventosConfirmados": [
       2,
       6,
@@ -76,6 +81,12 @@
       6,
       7,
       3
+    ],
+    "notificacoes": [
+      {
+        "notificacao": "Seu evento evento RUIM violou as normas da plataforma e foi retirado do ar.",
+        "time": "19/08/2023"
+      }
     ]
   },
   {
@@ -83,12 +94,16 @@
     "nome": "Zezito",
     "senha": "222222",
     "isAdmin": false,
-    "meusEventos": [
-      8
-    ],
+    "meusEventos": [],
     "eventosConfirmados": [
       5
     ],
-    "eventosSalvos": []
+    "eventosSalvos": [],
+    "notificacoes": [
+      {
+        "notificacao": "Seu evento Festa do Zezito violou as normas da plataforma e foi retirado do ar.",
+        "time": "19/08/2023"
+      }
+    ]
   }
 ]

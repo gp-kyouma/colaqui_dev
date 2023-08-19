@@ -6,11 +6,11 @@ import model.Model;
 import model.Usuario;
 import model.Evento;
 
-public class ListEventController {
+public class ListController {
 
     private Model model;
 
-    public ListEventController(Model model)
+    public ListController(Model model)
     {
         this.model = model;
     }
@@ -27,6 +27,21 @@ public class ListEventController {
         for (Evento i : evento_data)
         {
             if (user.isMeuEvento(i.getID()))
+                results.add(i);
+        }
+
+        return results;
+    }
+
+    public ArrayList<Usuario> ListPresencas(Evento evento)
+    {
+        ArrayList<Usuario> usuario_data = model.getUsuarioList();
+
+        ArrayList<Usuario> results = new ArrayList<Usuario>();
+
+        for (Usuario i : usuario_data)
+        {
+            if (evento.confirmouPresenca(i.getCartao()))
                 results.add(i);
         }
 

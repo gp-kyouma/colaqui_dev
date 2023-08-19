@@ -32,7 +32,13 @@ public class CreateEventController {
         // Se tudo ok, insere no evento na lista de eventos
 
         local_time = local_time.withSecond(0).withNano(0);
-        int new_id = model.getEventoList().size()+1;
+        int new_id = 0;
+        for (Evento i : model.getEventoList())
+        {
+            if (new_id < i.getID())
+                new_id = i.getID();
+        }
+        new_id++;
         model.addEventoToList(new Evento(new_id,nome,model.getLoggedUser().getCartao(),model.getLoggedUser().getNome(),descricao,local,local_date,local_time,maxVagas));
         model.saveEventos();
 

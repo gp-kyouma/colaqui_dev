@@ -14,10 +14,8 @@
     "avaliaram": [],
     "numAvaliacoes": 0,
     "totalAvaliacoes": 0,
-    "denunciaram": [
-      123321
-    ],
-    "numDenuncias": 1
+    "denunciaram": [],
+    "denuncias": []
   },
   {
     "id": 2,
@@ -39,7 +37,7 @@
     "numAvaliacoes": 1,
     "totalAvaliacoes": 10,
     "denunciaram": [],
-    "numDenuncias": 0
+    "denuncias": []
   },
   {
     "id": 3,
@@ -60,10 +58,8 @@
     ],
     "numAvaliacoes": 1,
     "totalAvaliacoes": 10,
-    "denunciaram": [
-      123321
-    ],
-    "numDenuncias": 1
+    "denunciaram": [],
+    "denuncias": []
   },
   {
     "id": 4,
@@ -81,7 +77,7 @@
     "numAvaliacoes": 0,
     "totalAvaliacoes": 0,
     "denunciaram": [],
-    "numDenuncias": 0
+    "denuncias": []
   },
   {
     "id": 5,
@@ -103,7 +99,7 @@
     "numAvaliacoes": 1,
     "totalAvaliacoes": 7,
     "denunciaram": [],
-    "numDenuncias": 0
+    "denuncias": []
   },
   {
     "id": 6,
@@ -124,8 +120,10 @@
     ],
     "numAvaliacoes": 1,
     "totalAvaliacoes": 9,
-    "denunciaram": [],
-    "numDenuncias": 0
+    "denunciaram": [
+      123321
+    ],
+    "denuncias": []
   },
   {
     "id": 7,
@@ -147,25 +145,7 @@
     "numAvaliacoes": 1,
     "totalAvaliacoes": 8,
     "denunciaram": [],
-    "numDenuncias": 0
-  },
-  {
-    "id": 8,
-    "nome": "Festa do Zezito",
-    "gerenteCartao": 111111,
-    "gerenteNome": "Zezito",
-    "descricao": "Festa legal na casa do Zezito",
-    "local": "Casa do Zezito",
-    "data": "03/10/2023",
-    "horario": "18:00",
-    "presencasConfirmadas": [],
-    "presencasExcedentes": [],
-    "maxVagas": 5,
-    "avaliaram": [],
-    "numAvaliacoes": 0,
-    "totalAvaliacoes": 0,
-    "denunciaram": [],
-    "numDenuncias": 0
+    "denuncias": []
   },
   {
     "id": 9,
@@ -183,6 +163,42 @@
     "numAvaliacoes": 0,
     "totalAvaliacoes": 0,
     "denunciaram": [],
-    "numDenuncias": 0
+    "denuncias": []
+  },
+  {
+    "id": 11,
+    "nome": "EVEN SHITTIER EVENT",
+    "gerenteCartao": 123321,
+    "gerenteNome": "Jorisnelson Da Silvassauro",
+    "descricao": "SUCKS ASS AND IS BAD",
+    "local": "HELL 2",
+    "data": "21/08/2023",
+    "horario": "20:35",
+    "presencasConfirmadas": [],
+    "presencasExcedentes": [],
+    "maxVagas": 10,
+    "avaliaram": [],
+    "numAvaliacoes": 0,
+    "totalAvaliacoes": 0,
+    "denunciaram": [],
+    "denuncias": []
+  },
+  {
+    "id": 12,
+    "nome": "Evento legal da sandra :)",
+    "gerenteCartao": 5,
+    "gerenteNome": "Sandra Pereira",
+    "descricao": "legal",
+    "local": "legal land",
+    "data": "19/08/2023",
+    "horario": "21:36",
+    "presencasConfirmadas": [],
+    "presencasExcedentes": [],
+    "maxVagas": 10,
+    "avaliaram": [],
+    "numAvaliacoes": 0,
+    "totalAvaliacoes": 0,
+    "denunciaram": [],
+    "denuncias": []
   }
 ]

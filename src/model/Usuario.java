@@ -18,6 +18,9 @@ public class Usuario {
     // Lista de IDs de eventos salvos pelo usuário
     private ArrayList<Integer> eventosSalvos;
 
+    // Lista de notificações
+    private ArrayList<Notificacao> notificacoes;
+
     public Usuario(Integer cartao, String nome, String senha, boolean isAdmin)
     {
         this.cartao = cartao;
@@ -27,6 +30,7 @@ public class Usuario {
         this.meusEventos = new ArrayList<Integer>();
         this.eventosConfirmados = new ArrayList<Integer>();
         this.eventosSalvos = new ArrayList<Integer>();
+        this.notificacoes = new ArrayList<Notificacao>();
     }
 
     public Integer getCartao()
@@ -62,6 +66,21 @@ public class Usuario {
     public ArrayList<Integer> getEventosSalvos()
     {
         return eventosSalvos;
+    }
+
+    public ArrayList<Notificacao> getNotificacoes()
+    {
+        return notificacoes;
+    }
+
+    public void addNotificacao(String notificacao)
+    {
+        notificacoes.add(new Notificacao(notificacao)); //Datetime definido no construtor
+    }
+    
+    public void removeNotificacao(int indice)
+    {
+        notificacoes.remove(indice);
     }
 
     public boolean confirmouPresenca(Integer eventID)

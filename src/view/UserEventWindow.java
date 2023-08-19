@@ -9,6 +9,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.*;
 import javax.swing.*;
 
+import controller.NotificationController;
 import model.Evento;
 import model.Model;
 import model.Usuario;
@@ -19,6 +20,8 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
 
     private Evento evento;
     private Model model;
+
+    private NotificationController controller;
 
     private JLabel nome_evento;
     private JLabel nome_gerente;
@@ -45,6 +48,7 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
 
         this.evento = evento;
         this.model = model;
+        controller = new NotificationController(model);
 
         panel = new JPanel();
 
@@ -208,8 +212,27 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
                 JOptionPane.showMessageDialog(null, "Você já avaliou esse evento!");
         }
         else if (s.equals("Denunciar Evento")) {
-            if (evento.addDenuncia(logado.getCartao()))
+            
+            String denunciaString;
+
+            do
+            {
+                denunciaString = (String)JOptionPane.showInputDialog("Motivo da denúncia:");
+
+                if (denunciaString == null) // usuário fechou a janela
+                    return;
+
+                if (denunciaString.equals(""))
+                    JOptionPane.showMessageDialog(null, "Forneça um motivo!");
+            }
+            while(denunciaString.equals(""));
+            
+            if (evento.addDenuncia(logado.getCartao(),denunciaString))
+            { 
                 JOptionPane.showMessageDialog(null, "Evento denunciado.");
+                if (evento.getNumDenuncias() == Evento.MUITAS_DENUNCIAS)
+                    controller.AddNotificationAdmin("O evento " + evento.getNome() + " recebeu múltiplas denúncias.");
+            }
             else
                 JOptionPane.showMessageDialog(null, "Você já denunciou esse evento.");
         }

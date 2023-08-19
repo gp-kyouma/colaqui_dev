@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import controller.ListEventController;
+import controller.ListController;
 import model.Evento;
 import model.Model;
 
 public class ListEventPanel extends JPanel implements MouseListener {
 
-    private ListEventController controller;
+    private ListController controller;
 
     private Model model;
 
@@ -24,7 +24,7 @@ public class ListEventPanel extends JPanel implements MouseListener {
 
     public ListEventPanel(Model model) {
 
-        controller = new ListEventController(model);
+        controller = new ListController(model);
         this.model = model;
 
         event_window = null;
@@ -63,7 +63,7 @@ public class ListEventPanel extends JPanel implements MouseListener {
                 event_window.close(); // se tem uma janela já aberta, fecha
 
             if (model.getLoggedUser().isAdmin())
-                event_window = new UserEventWindow(result, model);//change to AdminEventWindow when that exists
+                event_window = new AdminEventWindow(result, model, tableModel);
             else if (model.getLoggedUser().isMeuEvento(result.getID()))
                 event_window = new UserEventWindow(result, model);//change to ManagerEventWindow when that exists
             else

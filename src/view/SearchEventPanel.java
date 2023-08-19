@@ -98,7 +98,7 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
                 event_window.close(); // se tem uma janela já aberta, fecha
 
             if (model.getLoggedUser().isAdmin())
-                event_window = new UserEventWindow(result, model);//change to AdminEventWindow when that exists
+                event_window = new AdminEventWindow(result, model, tableModel);
             else if (model.getLoggedUser().isMeuEvento(result.getID()))
                 event_window = new UserEventWindow(result, model);//change to ManagerEventWindow when that exists
             else
