@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import model.Model;
@@ -38,6 +39,21 @@ public class SearchEventController {
         for (Evento i : evento_data)
         {
             if (i.getGerente().equals(key))
+                results.add(i);
+        }
+
+        return results;
+    }
+
+    public static ArrayList<Evento> filterInactive(ArrayList<Evento> list)
+    {
+        ArrayList<Evento> results = new ArrayList<Evento>();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        for (Evento i : list)
+        {
+            if (!LocalDateTime.of(i.getData(), i.getHorario()).isBefore(now))
                 results.add(i);
         }
 

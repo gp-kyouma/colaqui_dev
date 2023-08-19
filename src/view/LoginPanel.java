@@ -77,7 +77,7 @@ public class LoginPanel extends JPanel implements ActionListener {
                 return;
             }
 
-            String resultado = controller.doLogin(entered_cartao,entered_password);
+            String resultado = controller.validaCartao(entered_cartao,entered_password);
 
             if (resultado.equals("cartao_errado"))
             {

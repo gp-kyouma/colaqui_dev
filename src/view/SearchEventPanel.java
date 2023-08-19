@@ -21,6 +21,7 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
     private JTextField search_text_box;
     private JButton search_keyword_button;
     private JButton search_manager_button;
+    private JCheckBox filter_inactive_checkbox;
     private JTable search_table;
 
     private SearchEventTableModel tableModel;
@@ -35,9 +36,10 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
         // inicializa tabela de pesquisa com lista vazia (não foi feita nenhuma pesquisa ainda)
         tableModel = new SearchEventTableModel(new ArrayList<Evento>());
 
-        search_text_box = new JTextField (50);
+        search_text_box = new JTextField (30);
         search_keyword_button = new JButton ("Pesquisar por Sentença Chave");
         search_manager_button = new JButton ("Pesquisar por Gerente de Evento");
+        filter_inactive_checkbox = new JCheckBox("Filtrar Inativos");
         search_table = new JTable(tableModel);
 
         search_table.setAutoCreateRowSorter(true);
@@ -54,6 +56,7 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
         search_table_scrollpane.setPreferredSize(new Dimension (580, 400));
 
         add(search_text_box);
+        add(filter_inactive_checkbox);
         add(search_keyword_button);
         add(search_manager_button);
         add(search_table_scrollpane);
@@ -67,12 +70,18 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
             String search_key = search_text_box.getText();
             ArrayList<Evento> searchResults = controller.searchEventByKeyword(search_key);
 
+            if (filter_inactive_checkbox.isSelected())
+                searchResults = SearchEventController.filterInactive(searchResults);
+
             tableModel.setSearchResults(searchResults);
         }
         else if (s.equals("Pesquisar por Gerente de Evento")) {
             
             String search_key = search_text_box.getText();
             ArrayList<Evento> searchResults = controller.searchEventByManager(search_key);
+
+            if (filter_inactive_checkbox.isSelected())
+                searchResults = SearchEventController.filterInactive(searchResults);
 
             tableModel.setSearchResults(searchResults);
         }

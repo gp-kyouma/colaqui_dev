@@ -11,7 +11,7 @@ public class UserLoginController {
         this.model = model;
     }
 
-    public String doLogin(String cartao, String senha)
+    public String validaCartao(String cartao, String senha)
     {
         // Ver se cartão só contém 0-9
         if (!cartao.matches("^[0-9]+$")) 
