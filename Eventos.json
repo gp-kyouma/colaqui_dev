@@ -166,5 +166,23 @@
     "totalAvaliacoes": 0,
     "denunciaram": [],
     "numDenuncias": 0
+  },
+  {
+    "id": 9,
+    "nome": "Campeonato de Lethal League",
+    "gerenteCartao": 1,
+    "gerenteNome": "DACOMP",
+    "descricao": "4player, traga seu controle !?!",
+    "local": "Sala de Convivência do DACOMP",
+    "data": "27/08/2023",
+    "horario": "11:00",
+    "presencasConfirmadas": [],
+    "presencasExcedentes": [],
+    "maxVagas": 16,
+    "avaliaram": [],
+    "numAvaliacoes": 0,
+    "totalAvaliacoes": 0,
+    "denunciaram": [],
+    "numDenuncias": 0
   }
 ]

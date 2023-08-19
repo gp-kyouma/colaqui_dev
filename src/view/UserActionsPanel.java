@@ -18,6 +18,7 @@ public class UserActionsPanel extends JPanel implements ActionListener {
     private JPanel papel_patrocinador;
 
     private JButton create_event_button;
+    private JButton list_events_button;
 
     public UserActionsPanel(MainWindow window)
     {
@@ -55,6 +56,9 @@ public class UserActionsPanel extends JPanel implements ActionListener {
         create_event_button = new JButton("Criar Evento");
         create_event_button.addActionListener(this);
         papel_gerente.add(create_event_button);
+        list_events_button = new JButton("Listar Meus Eventos");
+        list_events_button.addActionListener(this);
+        papel_gerente.add(list_events_button);
 
         papel_patrocinador.add(new JLabel("PATROCINADOR TEST"));
 
@@ -73,6 +77,9 @@ public class UserActionsPanel extends JPanel implements ActionListener {
         }
         else if (s.equals("Criar Evento")) {
             window.updateCenterPanel("Criar Evento");
+        }
+        else if (s.equals("Listar Meus Eventos")) {
+            window.updateCenterPanel("Listar Eventos");
         }
     }
 

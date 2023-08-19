@@ -4,7 +4,13 @@
     "nome": "DACOMP",
     "senha": "password",
     "isAdmin": false,
-    "meusEventos": [],
+    "meusEventos": [
+      1,
+      2,
+      3,
+      6,
+      9
+    ],
     "eventosConfirmados": [],
     "eventosSalvos": []
   },
