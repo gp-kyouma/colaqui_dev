@@ -13,6 +13,8 @@ import model.Model;
 public class SearchEventPanel extends JPanel implements ActionListener {
 
     private SearchEventController controller;
+
+    private UserEventWindow event_window;
     
     private JTextField search_text_box;
     private JButton search_keyword_button;
@@ -24,6 +26,8 @@ public class SearchEventPanel extends JPanel implements ActionListener {
     public SearchEventPanel(Model model) {
 
         controller = new SearchEventController(model);
+
+        event_window = null;
 
         // inicializa tabela de pesquisa com lista vazia (não foi feita nenhuma pesquisa ainda)
         tableModel = new SearchEventTableModel(new ArrayList<Evento>());
@@ -37,6 +41,23 @@ public class SearchEventPanel extends JPanel implements ActionListener {
 
         search_keyword_button.addActionListener(this);
         search_manager_button.addActionListener(this);
+
+        search_table.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table = (JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                SearchEventTableModel tmodel = (SearchEventTableModel)table.getModel();
+
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    Evento result = tmodel.getSearchResults().get(row);
+                    // todo: abrir janelas diferentes dependendo se for admin, criador...
+                    event_window = new UserEventWindow(result, model);
+                    event_window.show();
+                    // this is bullshit probably
+                }
+            }
+        });
 
         setPreferredSize(new Dimension (600, 480));
 

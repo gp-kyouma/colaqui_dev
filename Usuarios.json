@@ -1,0 +1,69 @@
+[
+  {
+    "cartao": 1,
+    "nome": "DACOMP",
+    "senha": "password",
+    "isAdmin": false,
+    "meusEventos": [],
+    "eventosConfirmados": [],
+    "eventosSalvos": []
+  },
+  {
+    "cartao": 10,
+    "nome": "Jo�o Oppenheimer",
+    "senha": "lebomb",
+    "isAdmin": false,
+    "meusEventos": [],
+    "eventosConfirmados": [],
+    "eventosSalvos": []
+  },
+  {
+    "cartao": 11,
+    "nome": "Zezinho da Silva",
+    "senha": "senha",
+    "isAdmin": false,
+    "meusEventos": [],
+    "eventosConfirmados": [],
+    "eventosSalvos": []
+  },
+  {
+    "cartao": 999,
+    "nome": "Ademir da Silva",
+    "senha": "admin",
+    "isAdmin": true,
+    "meusEventos": [],
+    "eventosConfirmados": [],
+    "eventosSalvos": []
+  },
+  {
+    "cartao": 5,
+    "nome": "Sandra Pereira",
+    "senha": "123456789",
+    "isAdmin": false,
+    "meusEventos": [],
+    "eventosConfirmados": [],
+    "eventosSalvos": []
+  },
+  {
+    "cartao": 5,
+    "nome": "claudio Gomes",
+    "senha": "biruleibe",
+    "isAdmin": false,
+    "meusEventos": [],
+    "eventosConfirmados": [],
+    "eventosSalvos": []
+  },
+  {
+    "cartao": 123321,
+    "nome": "Jorisnelson Da Silvassauro",
+    "senha": "epic",
+    "isAdmin": false,
+    "meusEventos": [],
+    "eventosConfirmados": [
+      3
+    ],
+    "eventosSalvos": [
+      3
+    ]
+  }
+]

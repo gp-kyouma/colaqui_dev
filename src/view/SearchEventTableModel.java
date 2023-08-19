@@ -13,8 +13,7 @@ import model.Evento;
 
 public class SearchEventTableModel extends AbstractTableModel {
 
-    // add +1 column to split date and time
-    private String colunas[] = {"Nome", "Gerente", "Local", "Data", "Horário", "Vagas ocupadas", "Vagas disponíveis", "Vagas totais"};
+    private String colunas[] = {"Nome", "Gerente", "Local", "Data", "Horário", "Vagas ocupadas", "Vagas disponíveis", "Vagas totais", "Avaliação"};
     private ArrayList<Evento> searchResults;
     private final int COLUNA_NOME = 0;
     private final int COLUNA_GERENTE = 1;
@@ -24,6 +23,7 @@ public class SearchEventTableModel extends AbstractTableModel {
     private final int COLUNA_OCUPADAS = 5;
     private final int COLUNA_DISPONIVEIS = 6;
     private final int COLUNA_TOTAIS = 7;
+    private final int COLUNA_AVALIACAO = 8;
 
     public SearchEventTableModel(ArrayList<Evento> searchResults) {
         this.searchResults = searchResults;
@@ -73,6 +73,8 @@ public class SearchEventTableModel extends AbstractTableModel {
                 return Integer.class;
             case COLUNA_TOTAIS:
                 return Integer.class;
+            case COLUNA_AVALIACAO:
+                return Float.class;
             default:
                 return String.class;
         }
@@ -100,6 +102,8 @@ public class SearchEventTableModel extends AbstractTableModel {
                 return result.getVagasDisponiveis();
             case COLUNA_TOTAIS:
                 return result.getMaxVagas();
+            case COLUNA_AVALIACAO:
+                return result.getMediaAvaliacoes();
         }
         return null;
     }
@@ -109,5 +113,10 @@ public class SearchEventTableModel extends AbstractTableModel {
     {
         this.searchResults = searchResults;
         fireTableDataChanged();
+    }
+
+    public ArrayList<Evento> getSearchResults()
+    {
+        return searchResults;
     }
 }
