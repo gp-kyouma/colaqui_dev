@@ -28,7 +28,7 @@ public class MainWindow {
 
     public MainWindow(Model model) {
         
-        frame = new JFrame ("ColAqui 0.7.0");
+        frame = new JFrame ("ColAqui 0.7.1");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         side_panel = new JPanel(new CardLayout());
@@ -107,7 +107,18 @@ public class MainWindow {
         }
         else if (command.equals("Listar Eventos")) {
             center_layout.show(center_panel, "Listar Eventos");
-            ((ListEventPanel)list_events_panel).updateListing();
+            ((ListEventPanel)list_events_panel).updateListing("Listar Eventos");
+            ((ListEventPanel)list_events_panel).setShowDenuncias(true);
+        }
+        else if (command.equals("Eventos Salvos")) {
+            center_layout.show(center_panel, "Listar Eventos");
+            ((ListEventPanel)list_events_panel).updateListing("Eventos Salvos");
+            ((ListEventPanel)list_events_panel).setShowDenuncias(false);
+        }
+        else if (command.equals("Presenças Confirmadas")) {
+            center_layout.show(center_panel, "Listar Eventos");
+            ((ListEventPanel)list_events_panel).updateListing("Presenças Confirmadas");
+            ((ListEventPanel)list_events_panel).setShowDenuncias(false);
         }
     }
 }

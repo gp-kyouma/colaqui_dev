@@ -45,9 +45,7 @@
     "nome": "Sandra Pereira",
     "senha": "123456789",
     "isAdmin": false,
-    "meusEventos": [
-      12
-    ],
+    "meusEventos": [],
     "eventosConfirmados": [],
     "eventosSalvos": [],
     "notificacoes": []
@@ -67,7 +65,9 @@
     "nome": "Jorisnelson Da Silvassauro",
     "senha": "epic",
     "isAdmin": false,
-    "meusEventos": [],
+    "meusEventos": [
+      10
+    ],
     "eventosConfirmados": [
       2,
       6,
@@ -76,7 +76,6 @@
     ],
     "eventosSalvos": [
       2,
-      6,
       7,
       3
     ],

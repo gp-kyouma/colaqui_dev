@@ -24,7 +24,7 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
     private JCheckBox filter_inactive_checkbox;
     private JTable search_table;
 
-    private SearchEventTableModel tableModel;
+    private EventTableModel tableModel;
 
     public SearchEventPanel(Model model) {
 
@@ -34,7 +34,7 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
         event_window = null;
 
         // inicializa tabela de pesquisa com lista vazia (não foi feita nenhuma pesquisa ainda)
-        tableModel = new SearchEventTableModel(new ArrayList<Evento>());
+        tableModel = new EventTableModel(new ArrayList<Evento>(), false);
 
         search_text_box = new JTextField (30);
         search_keyword_button = new JButton ("Pesquisar por Sentença Chave");
@@ -73,7 +73,7 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
             if (filter_inactive_checkbox.isSelected())
                 searchResults = SearchEventController.filterInactive(searchResults);
 
-            tableModel.setSearchResults(searchResults);
+            tableModel.setListResults(searchResults);
         }
         else if (s.equals("Pesquisar por Gerente de Evento")) {
             
@@ -83,8 +83,13 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
             if (filter_inactive_checkbox.isSelected())
                 searchResults = SearchEventController.filterInactive(searchResults);
 
-            tableModel.setSearchResults(searchResults);
+            tableModel.setListResults(searchResults);
         }
+    }
+
+    public void closeSecondaryWindow()
+    {
+        event_window.close();
     }
 
     public void mousePressed(MouseEvent mouseEvent) {
@@ -92,15 +97,21 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
         int row = search_table.rowAtPoint(point);
 
         if (mouseEvent.getClickCount() == 2 && search_table.getSelectedRow() != -1) {
-            Evento result = tableModel.getSearchResults().get(row);
+            Evento result = tableModel.getListResults().get(row);
 
+            if (!model.isEventoOnList(result.getID()))
+            {
+                JOptionPane.showMessageDialog(null, "Evento inexistente!");
+                return;
+            }
+            
             if ((event_window != null) && (event_window.isVisible()))
                 event_window.close(); // se tem uma janela já aberta, fecha
 
             if (model.getLoggedUser().isAdmin())
-                event_window = new AdminEventWindow(result, model, tableModel);
+                event_window = new AdminEventWindow(result, model);
             else if (model.getLoggedUser().isMeuEvento(result.getID()))
-                event_window = new ManagerEventWindow(result, model, tableModel);
+                event_window = new ManagerEventWindow(result, model);
             else
                 event_window = new UserEventWindow(result, model);
             

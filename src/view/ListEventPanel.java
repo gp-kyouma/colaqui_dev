@@ -20,7 +20,7 @@ public class ListEventPanel extends JPanel implements MouseListener {
     
     private JTable list_table;
 
-    private ListEventTableModel tableModel;
+    private EventTableModel tableModel;
 
     public ListEventPanel(Model model) {
 
@@ -30,7 +30,7 @@ public class ListEventPanel extends JPanel implements MouseListener {
         event_window = null;
 
         // inicializa tabela de listagem vazia
-        tableModel = new ListEventTableModel(new ArrayList<Evento>());
+        tableModel = new EventTableModel(new ArrayList<Evento>(), false);
 
         list_table = new JTable(tableModel);
 
@@ -47,9 +47,24 @@ public class ListEventPanel extends JPanel implements MouseListener {
         add(list_table_scrollpane);
     }
 
-    public void updateListing()
+    public void updateListing(String tipo)
     {
-        tableModel.setListResults(controller.ListEvents(model.getLoggedUser()));
+        if (tipo.equals("Listar Eventos"))
+            tableModel.setListResults(controller.ListEvents(model.getLoggedUser()));
+        else if (tipo.equals("Eventos Salvos"))
+            tableModel.setListResults(controller.ListSavedEvents(model.getLoggedUser()));
+        else if (tipo.equals("Presenças Confirmadas"))
+            tableModel.setListResults(controller.ListConfirmedEvents(model.getLoggedUser()));
+    }
+
+    public void setShowDenuncias(boolean showDenuncias)
+    {
+        tableModel.setShowDenuncias(showDenuncias);
+    }
+
+    public void closeSecondaryWindow()
+    {
+        event_window.close();
     }
 
     public void mousePressed(MouseEvent mouseEvent) {
@@ -59,13 +74,19 @@ public class ListEventPanel extends JPanel implements MouseListener {
         if (mouseEvent.getClickCount() == 2 && list_table.getSelectedRow() != -1) {
             Evento result = tableModel.getListResults().get(row);
 
+            if (!model.isEventoOnList(result.getID()))
+            {
+                JOptionPane.showMessageDialog(null, "Evento inexistente!");
+                return;
+            }
+            
             if ((event_window != null) && (event_window.isVisible()))
                 event_window.close(); // se tem uma janela já aberta, fecha
 
             if (model.getLoggedUser().isAdmin())
-                event_window = new AdminEventWindow(result, model, tableModel);
+                event_window = new AdminEventWindow(result, model);
             else if (model.getLoggedUser().isMeuEvento(result.getID()))
-                event_window = new ManagerEventWindow(result, model, tableModel);
+                event_window = new ManagerEventWindow(result, model);
             else
                 event_window = new UserEventWindow(result, model);
             

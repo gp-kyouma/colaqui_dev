@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 
 import controller.ListController;
 import controller.RemoveEventController;
@@ -19,7 +18,6 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
 
     private Evento evento;
     private Model model;
-    private AbstractTableModel table_model;
 
     private RemoveEventController remove_controller;
     private ListController list_controller;
@@ -39,14 +37,13 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
     private JTable presencas_table;
     private JTable excedentes_table;
 
-    public ManagerEventWindow(Evento evento, Model model, AbstractTableModel table_model)
+    public ManagerEventWindow(Evento evento, Model model)
     {
         frame = new JFrame (evento.getNome());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         this.evento = evento;
         this.model = model;
-        this.table_model = table_model;
         remove_controller = new RemoveEventController(model); 
         list_controller = new ListController(model);
 
@@ -155,7 +152,6 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
             if (n == JOptionPane.YES_OPTION)
             {
                 remove_controller.RemoveEvent(evento, false);
-                table_model.fireTableDataChanged();
                 close();
             }
         }

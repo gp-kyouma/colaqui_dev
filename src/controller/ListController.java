@@ -19,14 +19,41 @@ public class ListController {
     {
         ArrayList<Evento> evento_data = model.getEventoList();
 
-        if (user.isAdmin())
-            return evento_data;
-            
         ArrayList<Evento> results = new ArrayList<Evento>();
 
         for (Evento i : evento_data)
         {
-            if (user.isMeuEvento(i.getID()))
+            if (user.isAdmin() || user.isMeuEvento(i.getID()))  // admin lista todos, gerente lista os dele
+                results.add(i);
+        }
+
+        return results;
+    }
+
+    public ArrayList<Evento> ListSavedEvents(Usuario user)
+    {
+        ArrayList<Evento> evento_data = model.getEventoList();
+
+        ArrayList<Evento> results = new ArrayList<Evento>();
+
+        for (Evento i : evento_data)
+        {
+            if (user.eventoEstaSalvo(i.getID()))
+                results.add(i);
+        }
+
+        return results;
+    }
+
+    public ArrayList<Evento> ListConfirmedEvents(Usuario user)
+    {
+        ArrayList<Evento> evento_data = model.getEventoList();
+
+        ArrayList<Evento> results = new ArrayList<Evento>();
+
+        for (Evento i : evento_data)
+        {
+            if (user.confirmouPresenca(i.getID()))
                 results.add(i);
         }
 

@@ -101,6 +101,16 @@ public class Model {
             }
     }
 
+    // checa se evento existe na lista
+    // (para prevenir ações em eventos que acabaram de ser deletados)
+    public boolean isEventoOnList(Integer eventID)
+    {
+        for (int i = 0; i < evento_data.size(); i++)
+            if (evento_data.get(i).getID() == eventID)
+                return true;
+        return false;
+    }
+
     // se já existe usuário com cartão == userID, atualiza dados
     public void updateUsuarioOnList(Integer userID, Usuario new_data)
     {
@@ -125,6 +135,16 @@ public class Model {
                 usuario_data.remove(i);
                 return;
             }
+    }
+
+    // checa se usuario existe na lista
+    // (para prevenir ações em usuários que acabaram de ser deletados)
+    public boolean isUsuarioOnList(Integer userID)
+    {
+        for (int i = 0; i < usuario_data.size(); i++)
+            if (usuario_data.get(i).getCartao() == userID)
+                return true;
+        return false;
     }
 
     public void setLoggedUser(Usuario user)

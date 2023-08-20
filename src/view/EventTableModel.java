@@ -11,10 +11,11 @@ import java.util.ArrayList;
 
 import model.Evento;
 
-public class SearchEventTableModel extends AbstractTableModel {
+public class EventTableModel extends AbstractTableModel {
 
-    private String colunas[] = {"Nome", "Gerente", "Local", "Data", "Horário", "Vagas ocupadas", "Vagas disponíveis", "Vagas totais", "Avaliação"};
-    private ArrayList<Evento> searchResults;
+    private String colunas[] = {"Nome", "Gerente", "Local", "Data", "Horário", "Vagas ocupadas", "Vagas disponíveis", "Vagas totais", "Avaliação", "Denúncias"};
+    private ArrayList<Evento> listResults;
+    private boolean showDenuncias;
     private final int COLUNA_NOME = 0;
     private final int COLUNA_GERENTE = 1;
     private final int COLUNA_LOCAL = 2;
@@ -24,9 +25,11 @@ public class SearchEventTableModel extends AbstractTableModel {
     private final int COLUNA_DISPONIVEIS = 6;
     private final int COLUNA_TOTAIS = 7;
     private final int COLUNA_AVALIACAO = 8;
+    private final int COLUNA_DENUNCIAS = 9;
 
-    public SearchEventTableModel(ArrayList<Evento> searchResults) {
-        this.searchResults = searchResults;
+    public EventTableModel(ArrayList<Evento> listResults, boolean showDenuncias) {
+        this.listResults = listResults;
+        this.showDenuncias = showDenuncias;
     }
 
     // retorna se a célula é editável ou não (no nosso caso não)
@@ -38,13 +41,13 @@ public class SearchEventTableModel extends AbstractTableModel {
     // retorna o total de itens (que virarão linhas) da nossa lista
     @Override
     public int getRowCount() {
-        return searchResults.size();
+        return listResults.size();
     }
 
     // retorna o total de colunas da tabela
     @Override
     public int getColumnCount() {
-        return colunas.length;
+        return colunas.length - (showDenuncias ? 0 : 1);
     }
 
     // retorna o nome da coluna de acordo com seu indice
@@ -75,6 +78,8 @@ public class SearchEventTableModel extends AbstractTableModel {
                 return Integer.class;
             case COLUNA_AVALIACAO:
                 return Float.class;
+            case COLUNA_DENUNCIAS:
+                return Integer.class;
             default:
                 return String.class;
         }
@@ -83,7 +88,7 @@ public class SearchEventTableModel extends AbstractTableModel {
     // preenche cada célula da tabela
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Evento result = this.searchResults.get(rowIndex);
+        Evento result = this.listResults.get(rowIndex);
 
         switch (columnIndex) {
             case COLUNA_NOME:
@@ -104,19 +109,27 @@ public class SearchEventTableModel extends AbstractTableModel {
                 return result.getMaxVagas();
             case COLUNA_AVALIACAO:
                 return result.getMediaAvaliacoes();
+            case COLUNA_DENUNCIAS:
+                return result.getNumDenuncias();
         }
         return null;
     }
 
-    // chamado depois da pesquisa retornar resultados, atualiza tabela
-    public void setSearchResults(ArrayList<Evento> searchResults)
+    // atualiza tabela
+    public void setListResults(ArrayList<Evento> listResults)
     {
-        this.searchResults = searchResults;
+        this.listResults = listResults;
         fireTableDataChanged();
     }
 
-    public ArrayList<Evento> getSearchResults()
+    public ArrayList<Evento> getListResults()
     {
-        return searchResults;
+        return listResults;
+    }
+
+    public void setShowDenuncias(boolean showDenuncias)
+    {
+        this.showDenuncias = showDenuncias;
+        fireTableStructureChanged();
     }
 }

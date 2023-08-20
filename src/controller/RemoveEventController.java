@@ -18,16 +18,10 @@ public class RemoveEventController {
         NotificationController notif_controller = new NotificationController(model);
         
         // Testar se evento existe
-        boolean found = false;
-        for (Evento i : model.getEventoList())
-            if(i.getID() == evento.getID())
-            {
-                found = true;
-                break;
-            }
-        if (!found)
+        if (!model.isEventoOnList(evento.getID()))
             return;
 
+        // Manda notificações aos usuários relevantes
         for (Usuario i : model.getUsuarioList())
         {
             if (i.confirmouPresenca(evento.getID()))

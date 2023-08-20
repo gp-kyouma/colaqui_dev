@@ -19,6 +19,7 @@ public class NotificationController {
         model.saveUsuarios();
     }
 
+    // Manda notificação a todos os admins
     public void AddNotificationAdmin(String notificacao)
     {
         for (Usuario i : model.getUsuarioList())
