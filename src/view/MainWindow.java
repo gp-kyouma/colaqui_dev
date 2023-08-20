@@ -25,7 +25,7 @@ public class MainWindow {
     private JPanel register_panel;
     private JPanel create_event_panel;
     private JPanel list_events_panel;
-    //ban user
+    private JPanel ban_user_panel;
     //patrocinio 1
     //patrocinio 2
     private JPanel notifs_panel;
@@ -36,7 +36,7 @@ public class MainWindow {
         
         this.model = model;
         
-        frame = new JFrame ("ColAqui 0.8.0");
+        frame = new JFrame ("ColAqui 0.9.0");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         side_panel = new JPanel(new CardLayout());
@@ -53,7 +53,7 @@ public class MainWindow {
         register_panel = new UserRegisterPanel(model,this);
         create_event_panel = new CreateEventPanel(model, this);
         list_events_panel = new ListEventPanel(model);
-        //ban user
+        ban_user_panel = new BanUserPanel(model, this);
         //patrocinio 1
         //patrocinio 2
         notifs_panel = new NotificacaoPanel(model);
@@ -70,7 +70,7 @@ public class MainWindow {
         center_panel.add(register_panel, "Cadastrar");
         center_panel.add(create_event_panel, "Criar Evento");
         center_panel.add(list_events_panel, "Listar Eventos");
-        //ban user
+        center_panel.add(ban_user_panel, "Banir Usuário");
         //patrocinio 1
         //patrocinio 2
         center_panel.add(notifs_panel, "Notificações");
@@ -136,18 +136,27 @@ public class MainWindow {
             ((ListEventPanel)list_events_panel).updateListing("Presenças Confirmadas");
             ((ListEventPanel)list_events_panel).setShowDenuncias(false);
         }
-        //3...
+        else if (command.equals("Banir Usuário")) {
+            center_layout.show(center_panel, "Banir Usuário");
+            ((BanUserPanel)ban_user_panel).updateListing();
+        }
+        //2...
         else if (command.equals("Notificações")) {
             center_layout.show(center_panel, "Notificações");
             ((NotificacaoPanel)notifs_panel).updateListing();
         }
     }
 
+    public void closeSecondaryWindows()
+    {
+        ((ListEventPanel)list_events_panel).closeSecondaryWindow();
+        ((SearchEventPanel)search_panel).closeSecondaryWindow();
+    }
+
     public void logout()
     {
         // se tem alguma janela secundária aberta, fecha
-        ((ListEventPanel)list_events_panel).closeSecondaryWindow();
-        ((SearchEventPanel)search_panel).closeSecondaryWindow();
+        closeSecondaryWindows();
 
         model.logout();
 

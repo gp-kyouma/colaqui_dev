@@ -89,4 +89,20 @@ public class ListController {
 
         return results;
     }
+
+    // usado em banir usuário
+    public ArrayList<Usuario> ListNonAdmins()
+    {
+        ArrayList<Usuario> usuario_data = model.getUsuarioList();
+
+        ArrayList<Usuario> results = new ArrayList<Usuario>();
+
+        for (Usuario i : usuario_data)
+        {
+            if (!i.isAdmin())
+                results.add(i);
+        }
+
+        return results;
+    }
 }

@@ -192,11 +192,17 @@ public class Evento {
         presencasConfirmadas.add(userID);
     }
 
+    // usado somente em excluir usuário
+    public boolean avaliou(Integer userID)
+    {
+        return avaliaram.contains(userID);
+    }
+
     // retorna true se conseguiu adicionar avaliação com sucesso,
     // senão retorna false
     public boolean addAvaliacao(Integer userID, Integer nota)
     {
-        if (avaliaram.contains(userID))
+        if (avaliou(userID))
             return false;   // mesmo usuário não deve poder avaliar múltiplas vezes
         
         avaliaram.add(userID);
@@ -205,11 +211,23 @@ public class Evento {
         return true;
     }
 
+    // usado somente em excluir usuário
+    public void removeAvaliou(Integer userID)
+    {
+        avaliaram.remove(userID);
+    }
+
+    // usado somente em excluir usuário
+    public boolean denunciou(Integer userID)
+    {
+        return denunciaram.contains(userID);
+    }
+
     // retorna true se conseguiu adicionar denúncia com sucesso,
     // senão retorna false
     public boolean addDenuncia(Integer userID, String denuncia)
     {
-        if (denunciaram.contains(userID))
+        if (denunciou(userID))
             return false;   // mesmo usuário não deve poder denunciar múltiplas vezes
         
         denunciaram.add(userID);
@@ -220,5 +238,11 @@ public class Evento {
     public void removeDenuncia(String denuncia)
     {
         denuncias.remove(denuncia);
+    }
+
+    // usado somente em excluir usuário
+    public void removeDenunciou(Integer userID)
+    {
+        denunciaram.remove(userID);
     }
 }

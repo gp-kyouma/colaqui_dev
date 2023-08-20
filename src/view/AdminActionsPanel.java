@@ -12,7 +12,7 @@ public class AdminActionsPanel extends JPanel implements ActionListener {
     private JLabel user_label;
 
     private JButton list_events_button;
-    // todo: ban user
+    private JButton ban_user_button;
 
     private JButton notifs_button;
     private JButton logout_button;
@@ -33,12 +33,16 @@ public class AdminActionsPanel extends JPanel implements ActionListener {
 
         list_events_button = new JButton("Listar Eventos");
         list_events_button.addActionListener(this);
-
         add(list_events_button);
+
+        ban_user_button = new JButton("Banir Usuário");
+        ban_user_button.addActionListener(this);
+        add(ban_user_button);
 
         notifs_button = new JButton ("Notificações");
         notifs_button.addActionListener(this);
         add(notifs_button);
+
         logout_button = new JButton ("Sair");
         logout_button.addActionListener(this);
         add(logout_button);
