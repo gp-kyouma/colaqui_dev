@@ -9,7 +9,6 @@ public class UserActionsPanel extends JPanel implements ActionListener {
     private MainWindow window;
     
     private JButton search_event_button;
-    private JLabel wip_label;
     private JLabel user_label;
 
     private JTabbedPane papel_pane;
@@ -23,12 +22,16 @@ public class UserActionsPanel extends JPanel implements ActionListener {
     private JButton create_event_button;
     private JButton list_events_button;
 
+    //patrocinio...
+
+    private JButton notifs_button;
+    private JButton logout_button;
+
     public UserActionsPanel(MainWindow window)
     {
         this.window = window;
         
         user_label = new JLabel();
-        wip_label = new JLabel ("WIP: outras funcionalidades"); // remove later obviously
 
         search_event_button = new JButton ("Pesquisar Evento");
         search_event_button.addActionListener(this);
@@ -71,8 +74,16 @@ public class UserActionsPanel extends JPanel implements ActionListener {
         papel_patrocinador.add(new JLabel("PATROCINADOR TEST"));
         // todo: all of this... lol
 
+
+
         add(papel_pane);
-        add(wip_label);
+
+        notifs_button = new JButton ("Notificações");
+        notifs_button.addActionListener(this);
+        add(notifs_button);
+        logout_button = new JButton ("Sair");
+        logout_button.addActionListener(this);
+        add(logout_button);
     }
 
     public void actionPerformed(ActionEvent e)
@@ -93,6 +104,13 @@ public class UserActionsPanel extends JPanel implements ActionListener {
         }
         else if (s.equals("Presenças Confirmadas")) {
             window.updateCenterPanel("Presenças Confirmadas");
+        }
+        // patrocinio..
+        else if (s.equals("Notificações")) {
+            window.updateCenterPanel("Notificações");
+        }
+        else if (s.equals("Sair")) {
+            window.logout();
         }
     }
 

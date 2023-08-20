@@ -89,7 +89,8 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
 
     public void closeSecondaryWindow()
     {
-        event_window.close();
+        if (event_window != null)
+            event_window.close();
     }
 
     public void mousePressed(MouseEvent mouseEvent) {

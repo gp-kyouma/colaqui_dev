@@ -33,12 +33,7 @@
     "meusEventos": [],
     "eventosConfirmados": [],
     "eventosSalvos": [],
-    "notificacoes": [
-      {
-        "notificacao": "O evento Festa do Zezito recebeu múltiplas denúncias.",
-        "time": "19/08/2023"
-      }
-    ]
+    "notificacoes": []
   },
   {
     "cartao": 5,
@@ -88,15 +83,7 @@
     ],
     "notificacoes": [
       {
-        "notificacao": "Seu evento evento RUIM violou as normas da plataforma e foi retirado do ar.",
-        "time": "19/08/2023"
-      },
-      {
         "notificacao": "Seu evento Evento do Jorisnelson violou as normas da plataforma e foi retirado do ar.",
-        "time": "20/08/2023"
-      },
-      {
-        "notificacao": "Sua presença no evento Evento de Teste foi cancelada pelo gerente.",
         "time": "20/08/2023"
       }
     ]
@@ -127,10 +114,6 @@
     "eventosConfirmados": [],
     "eventosSalvos": [],
     "notificacoes": [
-      {
-        "notificacao": "O usuário Sandra Pereira requisitou presença excedente no seu evento Evento de Teste.",
-        "time": "20/08/2023"
-      },
       {
         "notificacao": "O usuário Sandra Pereira requisitou presença excedente no seu evento Evento de Teste.",
         "time": "20/08/2023"

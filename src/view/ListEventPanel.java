@@ -64,7 +64,8 @@ public class ListEventPanel extends JPanel implements MouseListener {
 
     public void closeSecondaryWindow()
     {
-        event_window.close();
+        if (event_window != null)
+            event_window.close();
     }
 
     public void mousePressed(MouseEvent mouseEvent) {

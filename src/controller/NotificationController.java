@@ -30,5 +30,12 @@ public class NotificationController {
             }
         model.saveUsuarios();
     }
+
+    public void RemoveNotification(Usuario usuario, int indice)
+    {
+        usuario.removeNotificacao(indice);
+        model.updateUsuarioOnList(usuario.getCartao(), usuario);
+        model.saveUsuarios();
+    }
 }
 

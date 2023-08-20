@@ -16,27 +16,6 @@ public class Model {
         usuario_data = new ArrayList<Usuario>();
 
         logged_user = null;
-        
-        /*
-        // placeholder: database hardcoded
-        Evento e1 = new Evento(1, "Campeonato de PES",1, "DACOMP","Competição de PES no PS2, equipes nacionais", "Sala de Convivência do DACOMP", LocalDate.of(2023,8,9), LocalTime.of(12,30), 8);
-        Evento e2 = new Evento(2, "Campeonato de SF4",1, "DACOMP","Competição de SF4, estilo pro, Hugo banido", "Sala de Convivência do DACOMP", LocalDate.of(2023,8,8), LocalTime.of(13,30), 16);
-        Evento e3 = new Evento(3, "Campeonato de OMK",1, "DACOMP","*cackle**cackle**cackle*", "Sala de Convivência do DACOMP", LocalDate.of(2023,8,10), LocalTime.of(13,30), 8);
-        Evento e4 = new Evento(4, "Seminário de ES",2, "Prof. Galante", "Aprofundamento da matéria de ES", "Auditório Prof. Castilho", LocalDate.of(2023,8,1), LocalTime.of(15,30), 10);
-        Evento e5 = new Evento(5, "Seminário de FBD",2, "Prof. Galante", "Aprofundamento da matéria de FBD", "Sala 112 Prédio 43425", LocalDate.of(2023,7,27), LocalTime.of(17,30), 15);
-        Evento e6 = new Evento(6 ,"Seminário de SF4",1, "DACOMP", "Ensinamento dos básicos de SF4", "Sala de Convivência do DACOMP", LocalDate.of(2023,8,3), LocalTime.of(10,30), 10);
-        Evento e7 = new Evento(7, "Campeonato de Xadrez",3, "Prof. Nicolas", "Campeonato de xadrez entre os professores e alunos", "Sala de Convivência do DACOMP", LocalDate.of(2023,8,7), LocalTime.of(12,30), 4);
-
-        evento_data.add(e1);
-        evento_data.add(e2);
-        evento_data.add(e3);
-        evento_data.add(e4);
-        evento_data.add(e5);
-        evento_data.add(e6);
-        evento_data.add(e7);
-        
-        JsonManip.saveArrayListToJson("Eventos.json", evento_data);
-        */
 
         /*
         Usuario u1 = new Usuario(1, "DACOMP", "password", false);
@@ -168,7 +147,7 @@ public class Model {
         logged_user = user;
     }
 
-    public void logOff()
+    public void logout()
     {
         logged_user = null;
     }

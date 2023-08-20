@@ -9,17 +9,19 @@ public class AdminActionsPanel extends JPanel implements ActionListener {
     private MainWindow window;
     
     private JButton search_event_button;
-    private JLabel wip_label;
     private JLabel user_label;
 
     private JButton list_events_button;
+    // todo: ban user
+
+    private JButton notifs_button;
+    private JButton logout_button;
 
     public AdminActionsPanel(MainWindow window)
     {
         this.window = window;
         
         user_label = new JLabel();
-        wip_label = new JLabel ("WIP: outras funcionalidades"); // remove later obviously
 
         search_event_button = new JButton ("Pesquisar Evento");
         search_event_button.addActionListener(this);
@@ -34,7 +36,12 @@ public class AdminActionsPanel extends JPanel implements ActionListener {
 
         add(list_events_button);
 
-        add(wip_label);
+        notifs_button = new JButton ("Notificações");
+        notifs_button.addActionListener(this);
+        add(notifs_button);
+        logout_button = new JButton ("Sair");
+        logout_button.addActionListener(this);
+        add(logout_button);
     }
 
     public void actionPerformed(ActionEvent e)
@@ -46,6 +53,15 @@ public class AdminActionsPanel extends JPanel implements ActionListener {
         }
         else if (s.equals("Listar Eventos")) {
             window.updateCenterPanel("Listar Eventos");
+        }
+        else if (s.equals("Banir Usuário")) {
+            window.updateCenterPanel("Banir Usuário");
+        }
+        else if (s.equals("Notificações")) {
+            window.updateCenterPanel("Notificações");
+        }
+        else if (s.equals("Sair")) {
+            window.logout();
         }
     }
 
