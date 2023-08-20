@@ -27,7 +27,7 @@ public class RemoveEventController {
             if (i.confirmouPresenca(evento.getID()))
             {
                 i.removePresenca(evento.getID());
-                notif_controller.AddNotification(i, "Sua presença no evento " + evento.getNome() + " foi removida pois ele foi excluído.");
+                notif_controller.AddNotification(i, "Sua presença no evento " + evento.getNome() + " foi cancelada pois ele foi excluído.");
             }
             if (i.eventoEstaSalvo(evento.getID()))
             {

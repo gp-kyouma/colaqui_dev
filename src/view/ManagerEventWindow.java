@@ -7,7 +7,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import controller.ListController;
-import controller.RemoveEventController;
+import controller.ManagerEventController;
 import model.Evento;
 import model.Model;
 import model.Usuario;
@@ -19,7 +19,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
     private Evento evento;
     private Model model;
 
-    private RemoveEventController remove_controller;
+    private ManagerEventController controller;
     private ListController list_controller;
 
     private JLabel nome_evento;
@@ -44,7 +44,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
 
         this.evento = evento;
         this.model = model;
-        remove_controller = new RemoveEventController(model); 
+        controller = new ManagerEventController(model); 
         list_controller = new ListController(model);
 
         panel = new JPanel();
@@ -151,7 +151,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
             int n = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir esse evento?","Excluir Evento",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION)
             {
-                remove_controller.RemoveEvent(evento, false);
+                controller.ExcluirEvento(evento);
                 close();
             }
         }
@@ -184,10 +184,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
                 int n = JOptionPane.showConfirmDialog(null,"Remover presença deste usuário?","Remover Presença de Usuário",JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION)
                 {
-                    evento.removePresenca(presenca.getCartao());
-                    presenca.removePresenca(evento.getID());
-                    model.updateEventoOnList(evento.getID(),evento);
-                    model.updateUsuarioOnList(presenca.getCartao(),presenca);
+                    controller.RemovePresenca(evento, presenca);
                     usuarioTableModel.setListUsuarios(list_controller.ListPresencas(evento));
                 }
             }
@@ -197,10 +194,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
                 int n = JOptionPane.showConfirmDialog(null,"Aceitar presença excedente desse usuário?","Aceitar Presença Excedente",JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION)
                 {
-                    evento.addPresencaExcedente(presenca.getCartao());
-                    presenca.addPresenca(evento.getID());
-                    model.updateEventoOnList(evento.getID(),evento);
-                    model.updateUsuarioOnList(presenca.getCartao(),presenca);
+                    controller.AdicionaPresencaExcedente(evento, presenca);
                     usuarioTableModel.setListUsuarios(list_controller.ListPresencasExcedentes(evento));
                     ((UsuarioTableModel)presencas_table.getModel()).setListUsuarios(list_controller.ListPresencas(evento));
                 }

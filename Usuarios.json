@@ -48,7 +48,16 @@
     "meusEventos": [],
     "eventosConfirmados": [],
     "eventosSalvos": [],
-    "notificacoes": []
+    "notificacoes": [
+      {
+        "notificacao": "Seu pedido de presença excedente no evento Evento de Teste foi aceito.",
+        "time": "20/08/2023"
+      },
+      {
+        "notificacao": "Sua presença no evento Evento de Teste foi cancelada pois ele foi excluído.",
+        "time": "20/08/2023"
+      }
+    ]
   },
   {
     "cartao": 6,
@@ -65,24 +74,30 @@
     "nome": "Jorisnelson Da Silvassauro",
     "senha": "epic",
     "isAdmin": false,
-    "meusEventos": [
-      10
-    ],
+    "meusEventos": [],
     "eventosConfirmados": [
-      2,
       6,
       7,
-      3
+      3,
+      2
     ],
     "eventosSalvos": [
-      2,
       7,
-      3
+      3,
+      2
     ],
     "notificacoes": [
       {
         "notificacao": "Seu evento evento RUIM violou as normas da plataforma e foi retirado do ar.",
         "time": "19/08/2023"
+      },
+      {
+        "notificacao": "Seu evento Evento do Jorisnelson violou as normas da plataforma e foi retirado do ar.",
+        "time": "20/08/2023"
+      },
+      {
+        "notificacao": "Sua presença no evento Evento de Teste foi cancelada pelo gerente.",
+        "time": "20/08/2023"
       }
     ]
   },
@@ -100,6 +115,25 @@
       {
         "notificacao": "Seu evento Festa do Zezito violou as normas da plataforma e foi retirado do ar.",
         "time": "19/08/2023"
+      }
+    ]
+  },
+  {
+    "cartao": 123123,
+    "nome": "NotJorisnelson",
+    "senha": "epic",
+    "isAdmin": false,
+    "meusEventos": [],
+    "eventosConfirmados": [],
+    "eventosSalvos": [],
+    "notificacoes": [
+      {
+        "notificacao": "O usuário Sandra Pereira requisitou presença excedente no seu evento Evento de Teste.",
+        "time": "20/08/2023"
+      },
+      {
+        "notificacao": "O usuário Sandra Pereira requisitou presença excedente no seu evento Evento de Teste.",
+        "time": "20/08/2023"
       }
     ]
   }

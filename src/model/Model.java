@@ -79,7 +79,7 @@ public class Model {
     public void updateEventoOnList(Integer eventID, Evento new_data)
     {
         for (int i = 0; i < evento_data.size(); i++)
-            if (evento_data.get(i).getID() == eventID)
+            if (evento_data.get(i).getID().equals(eventID))
             {
                 evento_data.set(i, new_data);
                 return;
@@ -94,7 +94,7 @@ public class Model {
     public void removeEventoFromList(Integer eventID)
     {
         for (int i = 0; i < evento_data.size(); i++)
-            if (evento_data.get(i).getID() == eventID)
+            if (evento_data.get(i).getID().equals(eventID))
             {
                 evento_data.remove(i);
                 return;
@@ -106,16 +106,24 @@ public class Model {
     public boolean isEventoOnList(Integer eventID)
     {
         for (int i = 0; i < evento_data.size(); i++)
-            if (evento_data.get(i).getID() == eventID)
+            if (evento_data.get(i).getID().equals(eventID))
                 return true;
         return false;
+    }
+
+    public Evento getEventoFromList(Integer eventID)
+    {
+        for (int i = 0; i < evento_data.size(); i++)
+            if (evento_data.get(i).getID().equals(eventID))
+                return evento_data.get(i);
+        return null;
     }
 
     // se já existe usuário com cartão == userID, atualiza dados
     public void updateUsuarioOnList(Integer userID, Usuario new_data)
     {
         for (int i = 0; i < usuario_data.size(); i++)
-            if (usuario_data.get(i).getCartao() == userID)
+            if (usuario_data.get(i).getCartao().equals(userID))
             {
                 usuario_data.set(i, new_data);
                 return;
@@ -130,7 +138,7 @@ public class Model {
     public void removeUsuarioFromList(Integer userID)
     {
         for (int i = 0; i < usuario_data.size(); i++)
-            if (usuario_data.get(i).getCartao() == userID)
+            if (usuario_data.get(i).getCartao().equals(userID))
             {
                 usuario_data.remove(i);
                 return;
@@ -142,9 +150,17 @@ public class Model {
     public boolean isUsuarioOnList(Integer userID)
     {
         for (int i = 0; i < usuario_data.size(); i++)
-            if (usuario_data.get(i).getCartao() == userID)
+            if (usuario_data.get(i).getCartao().equals(userID))
                 return true;
         return false;
+    }
+
+    public Usuario getUsuarioFromList(Integer userID)
+    {
+        for (int i = 0; i < usuario_data.size(); i++)
+            if (usuario_data.get(i).getCartao().equals(userID))
+                return usuario_data.get(i);
+        return null;
     }
 
     public void setLoggedUser(Usuario user)

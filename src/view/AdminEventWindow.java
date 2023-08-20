@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.awt.*;
 import javax.swing.*;
 
+import controller.AdminEventController;
 import controller.ListController;
-import controller.RemoveEventController;
 import model.Evento;
 import model.Model;
 
@@ -18,7 +18,7 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
     private Evento evento;
     private Model model;
 
-    private RemoveEventController remove_controller;
+    private AdminEventController controller;
 
     private JLabel nome_evento;
     private JLabel nome_gerente;
@@ -44,7 +44,7 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
 
         this.evento = evento;
         this.model = model;
-        remove_controller = new RemoveEventController(model);
+        controller = new AdminEventController(model);
 
         panel = new JPanel();
 
@@ -147,7 +147,7 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
             int n = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir esse evento?","Excluir Evento",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION)
             {
-                remove_controller.RemoveEvent(evento, true);
+                controller.ExcluirEvento(evento);
                 close();
             }
         }
@@ -175,7 +175,7 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
             int n = JOptionPane.showConfirmDialog(null,"Essa denúncia é válida?","Denúncia",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.NO_OPTION)
             {
-                evento.removeDenuncia(result);
+                controller.DesconsiderarDenuncia(evento, result);
                 denuncias_model.setListDenuncias(evento.getDenuncias());
             }
         }

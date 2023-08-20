@@ -28,7 +28,7 @@ public class MainWindow {
 
     public MainWindow(Model model) {
         
-        frame = new JFrame ("ColAqui 0.7.1");
+        frame = new JFrame ("ColAqui 0.7.2");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         side_panel = new JPanel(new CardLayout());

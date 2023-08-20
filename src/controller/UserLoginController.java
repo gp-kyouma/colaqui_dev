@@ -18,11 +18,7 @@ public class UserLoginController {
             return "cartao_errado";
         
         // Verificar se cartão existe
-        Usuario encontrado = null;
-
-        for (Usuario i : model.getUsuarioList())
-            if (i.getCartao() == Integer.parseInt(cartao)) 
-                encontrado = i;
+        Usuario encontrado = model.getUsuarioFromList(Integer.parseInt(cartao));
         
         if (encontrado == null)
             return "cartao_inexistente";

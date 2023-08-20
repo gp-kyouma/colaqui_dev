@@ -19,9 +19,10 @@ public class UserRegisterController {
             return "cartao_errado";
         
         // Ver se o cartão é único
-        for (Usuario i : model.getUsuarioList())
-            if (i.getCartao() == Integer.parseInt(cartao)) 
-                return "cartao_nao_unico";
+        Usuario duplicata = model.getUsuarioFromList(Integer.parseInt(cartao));
+        
+        if (duplicata != null)
+            return "cartao_nao_unico";
         
         // Ver se senha só contém a-z A-Z 0-9 _
         if (!senha.matches("^[a-zA-Z0-9_]+$")) 

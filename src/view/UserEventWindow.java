@@ -3,13 +3,13 @@ package view;
 import java.awt.event.*;
 import java.time.format.DateTimeFormatter;
 
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Clipboard;
-
 import java.awt.*;
 import javax.swing.*;
 
-import controller.NotificationController;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Clipboard;
+
+import controller.UserEventController;
 import model.Evento;
 import model.Model;
 import model.Usuario;
@@ -21,7 +21,7 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
     private Evento evento;
     private Model model;
 
-    private NotificationController controller;
+    private UserEventController controller;
 
     private JLabel nome_evento;
     private JLabel nome_gerente;
@@ -48,7 +48,7 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
 
         this.evento = evento;
         this.model = model;
-        controller = new NotificationController(model);
+        controller = new UserEventController(model);
 
         panel = new JPanel();
 
@@ -180,15 +180,12 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
     {
         String s = e.getActionCommand();
         Usuario logado = model.getLoggedUser();
-        if (s.equals("Marcar Presença"))
-        {
+        if (s.equals("Marcar Presença")){
             // está desmarcado, marcar
-            boolean result = evento.addPresenca(logado.getCartao());
-            if (!result) // passou do limite de vagas
+            if (!controller.MarcaPresenca(evento, logado)) // passou do limite de vagas
                 JOptionPane.showMessageDialog(null, "Evento lotado! Pedido de presença salvo.");
             else
             {
-                logado.addPresenca(evento.getID());
                 JOptionPane.showMessageDialog(null, "Presença marcada!");
 
                 presenca_button.setActionCommand("Desmarcar Presença");
@@ -197,64 +194,63 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
         }
         else if (s.equals("Desmarcar Presença")) {
             // está marcado, desmarcar
-            evento.removePresenca(logado.getCartao());
-            logado.removePresenca(evento.getID());
+            controller.DesmarcaPresenca(evento, logado);
             JOptionPane.showMessageDialog(null, "Presença desmarcada!");
 
             presenca_button.setActionCommand("Marcar Presença");
             presenca_button.setText("Marcar Presença");
         }
         else if (s.equals("Avaliar Evento")) {
+            
             int nota = avaliacao_nota.getValue(); 
-            if (evento.addAvaliacao(logado.getCartao(), nota))
+            
+            if (controller.AvaliaEvento(evento, logado, nota)) 
                 JOptionPane.showMessageDialog(null, "Avaliação registrada!");
             else
                 JOptionPane.showMessageDialog(null, "Você já avaliou esse evento!");
         }
         else if (s.equals("Denunciar Evento")) {
             
-            String denunciaString;
+            String motivo;
 
             do
             {
-                denunciaString = (String)JOptionPane.showInputDialog("Motivo da denúncia:");
+                motivo = (String)JOptionPane.showInputDialog("Motivo da denúncia:");
 
-                if (denunciaString == null) // usuário fechou a janela
+                if (motivo == null) // usuário fechou a janela
                     return;
 
-                if (denunciaString.equals(""))
+                if (motivo.equals(""))
                     JOptionPane.showMessageDialog(null, "Forneça um motivo!");
             }
-            while(denunciaString.equals(""));
+            while(motivo.equals(""));
             
-            if (evento.addDenuncia(logado.getCartao(),denunciaString))
-            { 
+            if (controller.DenunciaEvento(evento, logado, motivo))
                 JOptionPane.showMessageDialog(null, "Evento denunciado.");
-                if (evento.getNumDenuncias() == Evento.MUITAS_DENUNCIAS)
-                    controller.AddNotificationAdmin("O evento " + evento.getNome() + " recebeu múltiplas denúncias.");
-            }
             else
                 JOptionPane.showMessageDialog(null, "Você já denunciou esse evento.");
         }
         else if (s.equals("Salvar Evento")) {
-            logado.salvaEvento(evento.getID());
+            
+            controller.SalvaEvento(evento, logado);
             JOptionPane.showMessageDialog(null, "Evento salvo!");
 
             salvar_button.setActionCommand("Remover Evento Salvo");
             salvar_button.setText("Remover Evento Salvo");
         }
         else if (s.equals("Remover Evento Salvo")) {
-            logado.removeEventoSalvo(evento.getID());
+            
+            controller.RemoveEventoSalvo(evento, logado);
             JOptionPane.showMessageDialog(null, "Evento removido da lista de salvos!");
 
             salvar_button.setActionCommand("Salvar Evento");
             salvar_button.setText("Salvar Evento");
         }
         else if (s.equals("Compartilhar Evento")) {
-            DateTimeFormatter data_formatter = DateTimeFormatter.ofPattern("dd/LL/yyyy");
-            DateTimeFormatter hora_formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-            String myString = String.format("Estarei presente no evento %s, dia %s às %s, no local %s! Cortesia do Programa ColAqui!",  evento.getNome(), data_formatter.format(evento.getData()), hora_formatter.format(evento.getHorario()), evento.getLocal());
+            String myString = controller.CompartilhaEvento(evento);
+
+            // manda a string para a área de transferência
             StringSelection stringSelection = new StringSelection(myString);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, null);
