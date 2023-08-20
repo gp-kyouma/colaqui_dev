@@ -100,7 +100,7 @@ public class SearchEventPanel extends JPanel implements ActionListener, MouseLis
             if (model.getLoggedUser().isAdmin())
                 event_window = new AdminEventWindow(result, model, tableModel);
             else if (model.getLoggedUser().isMeuEvento(result.getID()))
-                event_window = new UserEventWindow(result, model);//change to ManagerEventWindow when that exists
+                event_window = new ManagerEventWindow(result, model, tableModel);
             else
                 event_window = new UserEventWindow(result, model);
             

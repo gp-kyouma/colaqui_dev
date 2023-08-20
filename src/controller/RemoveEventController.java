@@ -13,7 +13,7 @@ public class RemoveEventController {
         this.model = model;
     }
 
-    public void RemoveEvent(Evento evento)
+    public void RemoveEvent(Evento evento, boolean byAdmin)
     {
         NotificationController notif_controller = new NotificationController(model);
         
@@ -43,10 +43,11 @@ public class RemoveEventController {
             if (i.isMeuEvento(evento.getID()))
             {
                 i.removeMeuEvento(evento.getID());
-                notif_controller.AddNotification(i, "Seu evento " + evento.getNome() + " violou as normas da plataforma e foi retirado do ar.");
+                if (byAdmin)
+                    notif_controller.AddNotification(i, "Seu evento " + evento.getNome() + " violou as normas da plataforma e foi retirado do ar.");
             }
 
-            model.updateUsuarioOnList(evento.getID(),i);
+            model.updateUsuarioOnList(i.getCartao(),i);
         }
         model.saveUsuarios();
 

@@ -67,9 +67,7 @@
     "nome": "Jorisnelson Da Silvassauro",
     "senha": "epic",
     "isAdmin": false,
-    "meusEventos": [
-      11
-    ],
+    "meusEventos": [],
     "eventosConfirmados": [
       2,
       6,

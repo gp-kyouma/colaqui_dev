@@ -166,24 +166,6 @@
     "denuncias": []
   },
   {
-    "id": 11,
-    "nome": "EVEN SHITTIER EVENT",
-    "gerenteCartao": 123321,
-    "gerenteNome": "Jorisnelson Da Silvassauro",
-    "descricao": "SUCKS ASS AND IS BAD",
-    "local": "HELL 2",
-    "data": "21/08/2023",
-    "horario": "20:35",
-    "presencasConfirmadas": [],
-    "presencasExcedentes": [],
-    "maxVagas": 10,
-    "avaliaram": [],
-    "numAvaliacoes": 0,
-    "totalAvaliacoes": 0,
-    "denunciaram": [],
-    "denuncias": []
-  },
-  {
     "id": 12,
     "nome": "Evento legal da sandra :)",
     "gerenteCartao": 5,

@@ -11,8 +11,9 @@ import controller.ListController;
 import controller.RemoveEventController;
 import model.Evento;
 import model.Model;
+import model.Usuario;
 
-public class AdminEventWindow extends SecondaryWindow implements ActionListener, WindowListener, MouseListener {
+public class ManagerEventWindow extends SecondaryWindow implements ActionListener, MouseListener, WindowListener {
     
     private JPanel panel;
 
@@ -21,6 +22,7 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
     private AbstractTableModel table_model;
 
     private RemoveEventController remove_controller;
+    private ListController list_controller;
 
     private JLabel nome_evento;
     private JLabel nome_gerente;
@@ -35,11 +37,9 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
     private JButton excluir_button;
 
     private JTable presencas_table;
-    private JTable denuncias_table;
+    private JTable excedentes_table;
 
-    private DenunciaTableModel denuncias_model;
-
-    public AdminEventWindow(Evento evento, Model model, AbstractTableModel table_model)
+    public ManagerEventWindow(Evento evento, Model model, AbstractTableModel table_model)
     {
         frame = new JFrame (evento.getNome());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,7 +47,8 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
         this.evento = evento;
         this.model = model;
         this.table_model = table_model;
-        remove_controller = new RemoveEventController(model);
+        remove_controller = new RemoveEventController(model); 
+        list_controller = new ListController(model);
 
         panel = new JPanel();
 
@@ -65,8 +66,10 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
         avaliacao_media = new JLabel(String.format("Avaliação média: %.2f", evento.getMediaAvaliacoes()));
 
         excluir_button = new JButton("Excluir Evento");
-
         excluir_button.addActionListener(this);
+
+        presencas_table  = new JTable(new UsuarioTableModel(list_controller.ListPresencas(evento),"Presenças"));
+        excedentes_table = new JTable(new UsuarioTableModel(list_controller.ListPresencasExcedentes(evento),"Presenças Excedentes"));
 
         descricao.setEditable(false);
         descricao.setColumns(20);
@@ -74,21 +77,18 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
         descricao.setLineWrap(true);
         descricao.setWrapStyleWord(true);
 
-        denuncias_model = new DenunciaTableModel(evento.getDenuncias());
-
-        presencas_table = new JTable(new UsuarioTableModel(new ListController(model).ListPresencas(evento),"Presenças"));
-        denuncias_table = new JTable(denuncias_model);
-
         frame.addWindowListener(this);
-        denuncias_table.addMouseListener(this);
+
+        presencas_table.addMouseListener(this);
+        excedentes_table.addMouseListener(this);
 
         presencas_table.setAutoCreateRowSorter(true);
         JScrollPane presencas_scrollpane = new JScrollPane(presencas_table);
         presencas_scrollpane.setPreferredSize(new Dimension (300, 150));
 
-        denuncias_table.setAutoCreateRowSorter(true);
-        JScrollPane denuncias_scrollpane = new JScrollPane(denuncias_table);
-        denuncias_scrollpane.setPreferredSize(new Dimension (300, 150));
+        excedentes_table.setAutoCreateRowSorter(true);
+        JScrollPane excedentes_scrollpane = new JScrollPane(excedentes_table);
+        excedentes_scrollpane.setPreferredSize(new Dimension (300, 150));
 
         panel.setPreferredSize(new Dimension (640, 480));
 
@@ -100,6 +100,8 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
         JPanel new_line_5 = new JPanel();
         JPanel new_line_6 = new JPanel();
         JPanel new_line_7 = new JPanel();
+        JPanel new_line_8 = new JPanel();
+        JPanel new_line_9 = new JPanel();
 
         new_line_1.setPreferredSize(new Dimension (640, 1));
         new_line_2.setPreferredSize(new Dimension (640, 1));
@@ -108,6 +110,8 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
         new_line_5.setPreferredSize(new Dimension (640, 1));
         new_line_6.setPreferredSize(new Dimension (640, 1));
         new_line_7.setPreferredSize(new Dimension (640, 1));
+        new_line_8.setPreferredSize(new Dimension (640, 1));
+        new_line_9.setPreferredSize(new Dimension (640, 1));
 
         panel.add(nome_evento);
         panel.add(new_line_1);
@@ -131,9 +135,9 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
 
         panel.add(avaliacao_media);
         panel.add(new_line_7);
-            
+        
         panel.add(presencas_scrollpane);
-        panel.add(denuncias_scrollpane);
+        panel.add(excedentes_scrollpane);
 
         panel.add(excluir_button);
 
@@ -150,7 +154,7 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
             int n = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir esse evento?","Excluir Evento",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION)
             {
-                remove_controller.RemoveEvent(evento, true);
+                remove_controller.RemoveEvent(evento, false);
                 table_model.fireTableDataChanged();
                 close();
             }
@@ -160,6 +164,7 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
     public void windowClosing(WindowEvent e) {
         model.updateEventoOnList(evento.getID(),evento);
         model.saveEventos();
+        model.saveUsuarios();
     }
 
     public void windowClosed(WindowEvent e) {}
@@ -170,17 +175,39 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
     public void windowDeactivated(WindowEvent e) {}
 
     public void mousePressed(MouseEvent mouseEvent) {
+        JTable table = (JTable) mouseEvent.getSource();
         Point point = mouseEvent.getPoint();
-        int row = denuncias_table.rowAtPoint(point);
+        int row = table.rowAtPoint(point);
+        UsuarioTableModel usuarioTableModel = (UsuarioTableModel)table.getModel();
 
-        if (mouseEvent.getClickCount() == 2 && denuncias_table.getSelectedRow() != -1) {
-            String result = denuncias_model.getListDenuncias().get(row);
-
-            int n = JOptionPane.showConfirmDialog(null,"Essa denúncia é válida?","Denúncia",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.NO_OPTION)
+        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+            String tipo = table.getModel().getColumnName(0);
+            if (tipo.equals("Presenças"))
             {
-                evento.removeDenuncia(result);
-                denuncias_model.setListDenuncias(evento.getDenuncias());
+                Usuario presenca = usuarioTableModel.getListUsuarios().get(row);
+                int n = JOptionPane.showConfirmDialog(null,"Remover presença deste usuário?","Remover Presença de Usuário",JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION)
+                {
+                    evento.removePresenca(presenca.getCartao());
+                    presenca.removePresenca(evento.getID());
+                    model.updateEventoOnList(evento.getID(),evento);
+                    model.updateUsuarioOnList(presenca.getCartao(),presenca);
+                    usuarioTableModel.setListUsuarios(list_controller.ListPresencas(evento));
+                }
+            }
+            else if (tipo.equals("Presenças Excedentes"))
+            {
+                Usuario presenca = usuarioTableModel.getListUsuarios().get(row);
+                int n = JOptionPane.showConfirmDialog(null,"Aceitar presença excedente desse usuário?","Aceitar Presença Excedente",JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION)
+                {
+                    evento.addPresencaExcedente(presenca.getCartao());
+                    presenca.addPresenca(evento.getID());
+                    model.updateEventoOnList(evento.getID(),evento);
+                    model.updateUsuarioOnList(presenca.getCartao(),presenca);
+                    usuarioTableModel.setListUsuarios(list_controller.ListPresencasExcedentes(evento));
+                    ((UsuarioTableModel)presencas_table.getModel()).setListUsuarios(list_controller.ListPresencas(evento));
+                }
             }
         }
     }
@@ -191,4 +218,3 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
 }
-

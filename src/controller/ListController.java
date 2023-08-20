@@ -47,4 +47,19 @@ public class ListController {
 
         return results;
     }
+
+    public ArrayList<Usuario> ListPresencasExcedentes(Evento evento)
+    {
+        ArrayList<Usuario> usuario_data = model.getUsuarioList();
+
+        ArrayList<Usuario> results = new ArrayList<Usuario>();
+
+        for (Usuario i : usuario_data)
+        {
+            if (evento.solicitouPresencaExcedente(i.getCartao()))
+                results.add(i);
+        }
+
+        return results;
+    }
 }
