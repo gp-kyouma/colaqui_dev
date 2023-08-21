@@ -40,15 +40,14 @@
     "nome": "Sandra Pereira",
     "senha": "123456789",
     "isAdmin": false,
-    "meusEventos": [],
+    "meusEventos": [
+      10
+    ],
     "eventosConfirmados": [],
     "eventosSalvos": [],
     "notificacoes": [
       {
-        "notificacao": "Seu pedido de presença excedente no evento Evento de Teste foi aceito.",
-        "time": "20/08/2023"
-      },
-      {
+        "header": "Presença cancelada",
         "notificacao": "Sua presença no evento Evento de Teste foi cancelada pois ele foi excluído.",
         "time": "20/08/2023"
       }
@@ -83,6 +82,7 @@
     ],
     "notificacoes": [
       {
+        "header": "Proposta de patrocínio aceita",
         "notificacao": "A sua proposta de patrocínio para o evento Campeonato de Lethal League foi aceita.",
         "time": "20/08/2023"
       }
@@ -100,6 +100,7 @@
     "eventosSalvos": [],
     "notificacoes": [
       {
+        "header": "Evento removido por administrador",
         "notificacao": "Seu evento Festa do Zezito violou as normas da plataforma e foi retirado do ar.",
         "time": "19/08/2023"
       }

@@ -12,9 +12,9 @@ import model.Notificacao;
 
 public class NotificationTableModel extends AbstractTableModel {
 
-    private String colunas[] = {"Notificação", "Data"};
+    private String colunas[] = {"Assunto", "Data"};
     private ArrayList<Notificacao> notifs;
-    private final int COLUNA_NOME = 0;
+    private final int COLUNA_ASSUNTO = 0;
     private final int COLUNA_DATA = 1;
 
     public NotificationTableModel(ArrayList<Notificacao> notifs) {
@@ -49,7 +49,7 @@ public class NotificationTableModel extends AbstractTableModel {
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
-            case COLUNA_NOME:
+            case COLUNA_ASSUNTO:
                 return String.class;
             case COLUNA_DATA:
                 return LocalDate.class;
@@ -64,8 +64,8 @@ public class NotificationTableModel extends AbstractTableModel {
         Notificacao result = this.notifs.get(rowIndex);
 
         switch (columnIndex) {
-            case COLUNA_NOME:
-                return result.getNotificacao();
+            case COLUNA_ASSUNTO:
+                return result.getHeader();
             case COLUNA_DATA:
                 return result.getTime();
         }

@@ -26,7 +26,7 @@ public class UserEventController {
         {
             // notifica gerente do evento
             Usuario gerente = model.getUsuarioFromList(evento.getGerenteCartao());
-            notif_controller.AddNotification(gerente, "O usuário " + usuario.getNome() + " requisitou presença excedente no seu evento " + evento.getNome() + ".");
+            notif_controller.AddNotification(gerente, "Solicitação de presença excedente", "O usuário " + usuario.getNome() + " requisitou presença excedente no seu evento " + evento.getNome() + ".");
             return false;
         }
 
@@ -51,7 +51,7 @@ public class UserEventController {
             return false;
         
         if (evento.getNumDenuncias() == Evento.MUITAS_DENUNCIAS)
-            notif_controller.AddNotificationAdmin("O evento " + evento.getNome() + " recebeu múltiplas denúncias.");
+            notif_controller.AddNotificationAdmin("Evento recebeu muitas denúncias", "O evento " + evento.getNome() + " recebeu múltiplas denúncias.");
         
         return true;
     }

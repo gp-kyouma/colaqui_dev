@@ -73,9 +73,9 @@ public class Usuario {
         return notificacoes;
     }
 
-    public void addNotificacao(String notificacao)
+    public void addNotificacao(String header, String notificacao)
     {
-        notificacoes.add(new Notificacao(notificacao)); //Datetime definido no construtor
+        notificacoes.add(new Notificacao(header, notificacao)); //Datetime definido no construtor
     }
     
     public void removeNotificacao(int indice)

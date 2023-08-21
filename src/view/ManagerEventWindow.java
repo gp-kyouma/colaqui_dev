@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.awt.*;
 import javax.swing.*;
 
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Clipboard;
+
 import controller.ListController;
 import controller.ManagerEventController;
 import controller.SponsorController;
@@ -35,6 +38,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
     private JLabel avaliacao_media;
 
     private JButton excluir_button;
+    private JButton compartilhar_button;
 
     private JTable presencas_table;
     private JTable excedentes_table;
@@ -70,6 +74,9 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
 
         excluir_button = new JButton("Excluir Evento");
         excluir_button.addActionListener(this);
+
+        compartilhar_button = new JButton("Compartilhar Evento");
+        compartilhar_button.addActionListener(this);
 
         presencas_table  = new JTable(new UsuarioTableModel(list_controller.ListPresencas(evento),"Presenças"));
         excedentes_table = new JTable(new UsuarioTableModel(list_controller.ListPresencasExcedentes(evento),"Presenças Excedentes"));
@@ -158,6 +165,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
         panel.add(propostas_scrollpane);
         panel.add(patrocinios_scrollpane);
 
+        panel.add(compartilhar_button);
         panel.add(excluir_button);
 
         Container pane = frame.getContentPane();
@@ -176,6 +184,17 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
                 controller.ExcluirEvento(evento);
                 close();
             }
+        }
+        else if (s.equals("Compartilhar Evento")) {
+
+            String myString = controller.CompartilhaEvento(evento);
+
+            // manda a string para a área de transferência
+            StringSelection stringSelection = new StringSelection(myString);
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(stringSelection, null);
+
+            JOptionPane.showMessageDialog(null, "Texto copiado para a área de transferência!");
         }
     }
 

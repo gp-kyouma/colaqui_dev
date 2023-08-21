@@ -12,20 +12,20 @@ public class NotificationController {
         this.model = model;
     }
 
-    public void AddNotification(Usuario usuario, String notificacao)
+    public void AddNotification(Usuario usuario, String header, String notificacao)
     {
-        usuario.addNotificacao(notificacao);
+        usuario.addNotificacao(header, notificacao);
         model.updateUsuarioOnList(usuario.getCartao(), usuario);
         model.saveUsuarios();
     }
 
     // Manda notificação a todos os admins
-    public void AddNotificationAdmin(String notificacao)
+    public void AddNotificationAdmin(String header, String notificacao)
     {
         for (Usuario i : model.getUsuarioList())
             if(i.isAdmin())
             {
-                i.addNotificacao(notificacao);
+                i.addNotificacao(header, notificacao);
                 model.updateUsuarioOnList(i.getCartao(), i);
             }
         model.saveUsuarios();

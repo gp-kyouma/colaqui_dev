@@ -54,7 +54,14 @@ public class NotificationPanel extends JPanel implements MouseListener {
         if (mouseEvent.getClickCount() == 2 && notif_table.getSelectedRow() != -1) {
             int indice = row;
 
-            int n = JOptionPane.showConfirmDialog(null,"Deseja excluir essa notificação?","Notificação",JOptionPane.YES_NO_OPTION);
+            Notificacao notif = model.getLoggedUser().getNotificacoes().get(indice);
+
+            int n = JOptionPane.showConfirmDialog(null,
+                                                    "<html><body><p style='width: 200px;'>"
+                                                    +notif.getNotificacao()
+                                                    +"<br/><br/>Deseja excluir essa notificação?</p></body></html>",
+                                                    "Notificação",
+                                                    JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION)
             {
                 controller.RemoveNotification(model.getLoggedUser(), indice);

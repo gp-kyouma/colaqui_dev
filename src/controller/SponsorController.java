@@ -81,8 +81,14 @@ public class SponsorController {
         model.saveEventos();
         
         Usuario gerente = model.getUsuarioFromList(evento.getGerenteCartao());
-        notif_controller.AddNotification(gerente, "O usuário " + usuario.getNome() + " anunciou uma proposta de patrocínio para o seu evento " + evento.getNome() + ":");
-        notif_controller.AddNotification(gerente, usuario.getNome() + ": \"" + proposta + "\"");
+        notif_controller.AddNotification(gerente, "Proposta de Patrocínio",
+                                            "<html>Proposta de Patrocínio:<br/>Patrocinador: "
+                                            + usuario.getNome()
+                                            + "<br/>Evento: " 
+                                            + evento.getNome() 
+                                            + "<br/>Proposta: "
+                                            + proposta
+                                            + "</html>");
 
         return "ok";
     }
@@ -92,7 +98,7 @@ public class SponsorController {
         // passa da lista de propostas pra lista de patrocinadores, e manda notificação ao patrocinador
         evento.aceitaPropostaPatrocinio(usuario.getCartao());
 
-        notif_controller.AddNotification(usuario, "A sua proposta de patrocínio para o evento " + evento.getNome() + " foi aceita.");
+        notif_controller.AddNotification(usuario, "Proposta de patrocínio aceita","A sua proposta de patrocínio para o evento " + evento.getNome() + " foi aceita.");
     }
 
     public void rejectProposal(Evento evento, Usuario usuario)
@@ -100,6 +106,6 @@ public class SponsorController {
         // remove da lista de propostas, e manda notificação ao patrocinador
         evento.rejeitaPropostaPatrocinio(usuario.getCartao());
 
-        notif_controller.AddNotification(usuario, "A sua proposta de patrocínio para o evento " + evento.getNome() + " foi rejeitada.");
+        notif_controller.AddNotification(usuario, "Proposta de patrocínio rejeitada","A sua proposta de patrocínio para o evento " + evento.getNome() + " foi rejeitada.");
     }
 }

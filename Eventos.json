@@ -184,5 +184,25 @@
     "patrocinadores": [
       123321
     ]
+  },
+  {
+    "id": 10,
+    "nome": "Festa da Sandra",
+    "gerenteCartao": 5,
+    "gerenteNome": "Sandra Pereira",
+    "descricao": "epico",
+    "local": "Casa da Sandra",
+    "data": "22/08/2023",
+    "horario": "23:50",
+    "presencasConfirmadas": [],
+    "presencasExcedentes": [],
+    "maxVagas": 10,
+    "avaliaram": [],
+    "numAvaliacoes": 0,
+    "totalAvaliacoes": 0,
+    "denunciaram": [],
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": []
   }
 ]
