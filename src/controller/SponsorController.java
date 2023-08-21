@@ -82,13 +82,12 @@ public class SponsorController {
         
         Usuario gerente = model.getUsuarioFromList(evento.getGerenteCartao());
         notif_controller.AddNotification(gerente, "Proposta de Patrocínio",
-                                            "<html>Proposta de Patrocínio:<br/>Patrocinador: "
+                                            "Proposta de Patrocínio:<br/>Patrocinador: "
                                             + usuario.getNome()
                                             + "<br/>Evento: " 
                                             + evento.getNome() 
                                             + "<br/>Proposta: "
-                                            + proposta
-                                            + "</html>");
+                                            + proposta);
 
         return "ok";
     }
