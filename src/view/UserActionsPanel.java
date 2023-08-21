@@ -22,7 +22,8 @@ public class UserActionsPanel extends JPanel implements ActionListener {
     private JButton create_event_button;
     private JButton list_events_button;
 
-    //patrocinio...
+    private JButton propose_sponsor_button;
+    private JButton sponsored_events_button;
 
     private JButton notifs_button;
     private JButton logout_button;
@@ -71,10 +72,12 @@ public class UserActionsPanel extends JPanel implements ActionListener {
         list_events_button.addActionListener(this);
         papel_gerente.add(list_events_button);
 
-        papel_patrocinador.add(new JLabel("PATROCINADOR TEST"));
-        // todo: all of this... lol
-
-
+        propose_sponsor_button = new JButton("Propor Patrocínio");
+        propose_sponsor_button.addActionListener(this);
+        papel_patrocinador.add(propose_sponsor_button);
+        sponsored_events_button = new JButton("Eventos Patrocinados");
+        sponsored_events_button.addActionListener(this);
+        papel_patrocinador.add(sponsored_events_button);
 
         add(papel_pane);
 
@@ -105,7 +108,12 @@ public class UserActionsPanel extends JPanel implements ActionListener {
         else if (s.equals("Presenças Confirmadas")) {
             window.updateCenterPanel("Presenças Confirmadas");
         }
-        // patrocinio..
+        else if (s.equals("Propor Patrocínio")) {
+            window.updateCenterPanel("Propor Patrocínio");
+        }
+        else if (s.equals("Eventos Patrocinados")) {
+            window.updateCenterPanel("Eventos Patrocinados");
+        }
         else if (s.equals("Notificações")) {
             window.updateCenterPanel("Notificações");
         }

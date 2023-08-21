@@ -26,8 +26,8 @@ public class MainWindow {
     private JPanel create_event_panel;
     private JPanel list_events_panel;
     private JPanel ban_user_panel;
-    //patrocinio 1
-    //patrocinio 2
+    private JPanel propose_sponsor_panel;
+    private JPanel sponsored_events_panel;
     private JPanel notifs_panel;
 
     private Model model;
@@ -36,7 +36,7 @@ public class MainWindow {
         
         this.model = model;
         
-        frame = new JFrame ("ColAqui 0.9.0");
+        frame = new JFrame ("ColAqui 1.0.0");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         side_panel = new JPanel(new CardLayout());
@@ -54,9 +54,9 @@ public class MainWindow {
         create_event_panel = new CreateEventPanel(model, this);
         list_events_panel = new ListEventPanel(model);
         ban_user_panel = new BanUserPanel(model, this);
-        //patrocinio 1
-        //patrocinio 2
-        notifs_panel = new NotificacaoPanel(model);
+        propose_sponsor_panel = new SponsorProposalPanel(model);
+        sponsored_events_panel = new SponsoredEventsPanel(model);
+        notifs_panel = new NotificationPanel(model);
 
         empty_panel = new JPanel();
         empty_panel.setPreferredSize(new Dimension (600, 480));    
@@ -71,8 +71,8 @@ public class MainWindow {
         center_panel.add(create_event_panel, "Criar Evento");
         center_panel.add(list_events_panel, "Listar Eventos");
         center_panel.add(ban_user_panel, "Banir Usuário");
-        //patrocinio 1
-        //patrocinio 2
+        center_panel.add(propose_sponsor_panel, "Propor Patrocínio");
+        center_panel.add(sponsored_events_panel, "Eventos Patrocinados");
         center_panel.add(notifs_panel, "Notificações");
 
         // paineis iniciais
@@ -140,10 +140,16 @@ public class MainWindow {
             center_layout.show(center_panel, "Banir Usuário");
             ((BanUserPanel)ban_user_panel).updateListing();
         }
-        //2...
+        else if (command.equals("Propor Patrocínio")) {
+            center_layout.show(center_panel, "Propor Patrocínio");
+        }
+        else if (command.equals("Eventos Patrocinados")) {
+            center_layout.show(center_panel, "Eventos Patrocinados");
+            ((SponsoredEventsPanel)sponsored_events_panel).updateListing();
+        }
         else if (command.equals("Notificações")) {
             center_layout.show(center_panel, "Notificações");
-            ((NotificacaoPanel)notifs_panel).updateListing();
+            ((NotificationPanel)notifs_panel).updateListing();
         }
     }
 

@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import controller.AdminEventController;
 import controller.ListController;
+import controller.SponsorController;
 import model.Evento;
 import model.Model;
 
@@ -35,7 +36,10 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
     private JTable presencas_table;
     private JTable denuncias_table;
 
-    private DenunciaTableModel denuncias_model;
+    private JTable propostas_table;
+    private JTable patrocinios_table;
+
+    private ReportTableModel denuncias_model;
 
     public AdminEventWindow(Evento evento, Model model)
     {
@@ -71,7 +75,7 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
         descricao.setLineWrap(true);
         descricao.setWrapStyleWord(true);
 
-        denuncias_model = new DenunciaTableModel(evento.getDenuncias());
+        denuncias_model = new ReportTableModel(evento.getDenuncias());
 
         presencas_table = new JTable(new UsuarioTableModel(new ListController(model).ListPresencas(evento),"Presenças"));
         denuncias_table = new JTable(denuncias_model);
@@ -87,7 +91,18 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
         JScrollPane denuncias_scrollpane = new JScrollPane(denuncias_table);
         denuncias_scrollpane.setPreferredSize(new Dimension (300, 150));
 
-        panel.setPreferredSize(new Dimension (640, 480));
+        propostas_table = new JTable(new UsuarioTableModel(new SponsorController(model).ListPotentialSponsors(evento),"Propostas de Patrocínio"));
+        patrocinios_table = new JTable(new UsuarioTableModel(new SponsorController(model).ListSponsors(evento),"Patrocinadores"));
+
+        propostas_table.setAutoCreateRowSorter(true);
+        JScrollPane propostas_scrollpane = new JScrollPane(propostas_table);
+        propostas_scrollpane.setPreferredSize(new Dimension (300, 150));
+
+        patrocinios_table.setAutoCreateRowSorter(true);
+        JScrollPane patrocinios_scrollpane = new JScrollPane(patrocinios_table);
+        patrocinios_scrollpane.setPreferredSize(new Dimension (300, 150));
+
+        panel.setPreferredSize(new Dimension (640, 640));
 
         // formatação da UI
         JPanel new_line_1 = new JPanel();
@@ -131,6 +146,9 @@ public class AdminEventWindow extends SecondaryWindow implements ActionListener,
             
         panel.add(presencas_scrollpane);
         panel.add(denuncias_scrollpane);
+
+        panel.add(propostas_scrollpane);
+        panel.add(patrocinios_scrollpane);
 
         panel.add(excluir_button);
 

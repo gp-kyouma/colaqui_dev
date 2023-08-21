@@ -17,24 +17,6 @@ public class Model {
 
         logged_user = null;
 
-        /*
-        Usuario u1 = new Usuario(1, "DACOMP", "password", false);
-        Usuario u2 = new Usuario(10, "João Oppenheimer", "lebomb", false);
-        Usuario u3 = new Usuario(11, "Zezinho da Silva", "senha", false);
-        Usuario u4 = new Usuario(999, "Ademir da Silva", "admin", true);
-        Usuario u5 = new Usuario(5, "Sandra Pereira", "123456789", false);
-        Usuario u6 = new Usuario(5, "claudio Gomes", "biruleibe", false);
-
-        usuario_data.add(u1);
-        usuario_data.add(u2);
-        usuario_data.add(u3);
-        usuario_data.add(u4);
-        usuario_data.add(u5);
-        usuario_data.add(u6);
-
-        //JsonManip.saveArrayListToJson("Usuarios.json", usuario_data);
-        */
-
         evento_data  = JsonManip.readArrayListFromJson("Eventos.json", Evento.class);
         usuario_data = JsonManip.readArrayListFromJson("Usuarios.json", Usuario.class);
     }

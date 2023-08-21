@@ -15,7 +15,9 @@
     "numAvaliacoes": 0,
     "totalAvaliacoes": 0,
     "denunciaram": [],
-    "denuncias": []
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": []
   },
   {
     "id": 2,
@@ -39,7 +41,9 @@
     "denunciaram": [
       123321
     ],
-    "denuncias": []
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": []
   },
   {
     "id": 3,
@@ -61,7 +65,9 @@
     "numAvaliacoes": 1,
     "totalAvaliacoes": 10,
     "denunciaram": [],
-    "denuncias": []
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": []
   },
   {
     "id": 4,
@@ -79,7 +85,9 @@
     "numAvaliacoes": 0,
     "totalAvaliacoes": 0,
     "denunciaram": [],
-    "denuncias": []
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": []
   },
   {
     "id": 5,
@@ -101,7 +109,9 @@
     "numAvaliacoes": 1,
     "totalAvaliacoes": 7,
     "denunciaram": [],
-    "denuncias": []
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": []
   },
   {
     "id": 6,
@@ -125,7 +135,9 @@
     "denunciaram": [
       123321
     ],
-    "denuncias": []
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": []
   },
   {
     "id": 7,
@@ -147,7 +159,9 @@
     "numAvaliacoes": 1,
     "totalAvaliacoes": 8,
     "denunciaram": [],
-    "denuncias": []
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": []
   },
   {
     "id": 9,
@@ -165,6 +179,10 @@
     "numAvaliacoes": 0,
     "totalAvaliacoes": 0,
     "denunciaram": [],
-    "denuncias": []
+    "denuncias": [],
+    "propostasPatrocinio": [],
+    "patrocinadores": [
+      123321
+    ]
   }
 ]

@@ -31,6 +31,9 @@ public class Evento {
     private ArrayList<Integer> denunciaram; // pessoas que já denunciaram esse evento
     private ArrayList<String> denuncias;
 
+    private ArrayList<Integer> propostasPatrocinio; // lista de patrocinadores que fizeram propostas a esse evento
+    private ArrayList<Integer> patrocinadores;      // lista de patrocinadores aceitos pelo gerente
+
     public Evento(Integer id, String nome, Integer gerenteCartao, String gerenteNome, String descricao, String local, LocalDate data, LocalTime horario, Integer maxVagas)
     {
         this.id = id;
@@ -49,6 +52,8 @@ public class Evento {
         this.totalAvaliacoes = 0;
         this.denunciaram = new ArrayList<Integer>();
         this.denuncias = new ArrayList<String>();
+        this.propostasPatrocinio = new ArrayList<Integer>();
+        this.patrocinadores = new ArrayList<Integer>();
     }
 
     public Integer getID()
@@ -244,5 +249,37 @@ public class Evento {
     public void removeDenunciou(Integer userID)
     {
         denunciaram.remove(userID);
+    }
+
+    public void recebePropostaPatrocinio(Integer userID)
+    {
+        propostasPatrocinio.add(userID);
+    }
+
+    public void aceitaPropostaPatrocinio(Integer userID)
+    {
+        propostasPatrocinio.remove(userID);
+        patrocinadores.add(userID);
+    }
+
+    public void rejeitaPropostaPatrocinio(Integer userID)
+    {
+        propostasPatrocinio.remove(userID);
+    }
+
+    // usado somente em excluir usuário
+    public void removePatrocinio(Integer userID)
+    {
+        patrocinadores.remove(userID);
+    }
+
+    public boolean fezProposta(Integer userID)
+    {
+        return propostasPatrocinio.contains(userID);
+    }
+
+    public boolean isPatrocinador(Integer userID)
+    {
+        return patrocinadores.contains(userID);
     }
 }

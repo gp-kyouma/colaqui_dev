@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Clipboard;
 
+import controller.SponsorController;
 import controller.UserEventController;
 import model.Evento;
 import model.Model;
@@ -40,6 +41,8 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
     private JButton compartilhar_button;
 
     private JSlider avaliacao_nota;
+
+    private JTable patrocinios_table;
 
     public UserEventWindow(Evento evento, Model model)
     {
@@ -114,6 +117,11 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
 
         frame.addWindowListener(this);
 
+        patrocinios_table = new JTable(new UsuarioTableModel(new SponsorController(model).ListSponsors(evento),"Patrocinadores"));
+        patrocinios_table.setAutoCreateRowSorter(true);
+        JScrollPane patrocinios_scrollpane = new JScrollPane(patrocinios_table);
+        patrocinios_scrollpane.setPreferredSize(new Dimension (280, 260));
+
         panel.setPreferredSize(new Dimension (640, 480));
 
         // formatação da UI
@@ -127,6 +135,9 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
         JPanel new_line_8 = new JPanel();
         JPanel new_line_9 = new JPanel();
 
+        JPanel info_panel = new JPanel();
+        info_panel.setPreferredSize(new Dimension (280, 260));
+
         new_line_1.setPreferredSize(new Dimension (640, 1));
         new_line_2.setPreferredSize(new Dimension (640, 1));
         new_line_3.setPreferredSize(new Dimension (640, 1));
@@ -137,27 +148,34 @@ public class UserEventWindow extends SecondaryWindow implements ActionListener, 
         new_line_8.setPreferredSize(new Dimension (640, 1));
         new_line_9.setPreferredSize(new Dimension (640, 1));
 
-        panel.add(nome_evento);
-        panel.add(new_line_1);
+        info_panel.add(nome_evento);
+        info_panel.add(new_line_1);
 
-        panel.add(nome_gerente);
-        panel.add(new_line_2);
+        info_panel.add(nome_gerente);
+        info_panel.add(new_line_2);
 
-        panel.add(descricao);
-        panel.add(new_line_3);
+        info_panel.add(descricao);
+        info_panel.add(new_line_3);
 
-        panel.add(local);
-        panel.add(new_line_4);
+        info_panel.add(local);
+        info_panel.add(new_line_4);
 
-        panel.add(data);
-        panel.add(horario);
-        panel.add(new_line_5);
+        info_panel.add(data);
+        info_panel.add(horario);
+        info_panel.add(new_line_5);
 
-        panel.add(vagas_totais);
-        panel.add(vagas_restantes);
-        panel.add(new_line_6);
+        info_panel.add(vagas_totais);
+        info_panel.add(vagas_restantes);
+        info_panel.add(new_line_6);
 
-        panel.add(avaliacao_media);
+        info_panel.add(avaliacao_media);
+
+        panel.add(info_panel);
+
+        // só mostra patrocínios se existirem
+        if (patrocinios_table.getModel().getRowCount() > 0)
+            panel.add(patrocinios_scrollpane);
+
         panel.add(new_line_7);
         
         panel.add(presenca_button);

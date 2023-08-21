@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import controller.ListController;
 import controller.ManagerEventController;
+import controller.SponsorController;
 import model.Evento;
 import model.Model;
 import model.Usuario;
@@ -21,6 +22,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
 
     private ManagerEventController controller;
     private ListController list_controller;
+    private SponsorController sponsor_controller;
 
     private JLabel nome_evento;
     private JLabel nome_gerente;
@@ -37,6 +39,9 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
     private JTable presencas_table;
     private JTable excedentes_table;
 
+    private JTable propostas_table;
+    private JTable patrocinios_table;
+
     public ManagerEventWindow(Evento evento, Model model)
     {
         frame = new JFrame (evento.getNome());
@@ -46,6 +51,7 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
         this.model = model;
         controller = new ManagerEventController(model); 
         list_controller = new ListController(model);
+        sponsor_controller = new SponsorController(model);
 
         panel = new JPanel();
 
@@ -87,7 +93,20 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
         JScrollPane excedentes_scrollpane = new JScrollPane(excedentes_table);
         excedentes_scrollpane.setPreferredSize(new Dimension (300, 150));
 
-        panel.setPreferredSize(new Dimension (640, 480));
+        propostas_table = new JTable(new UsuarioTableModel(sponsor_controller.ListPotentialSponsors(evento),"Propostas de Patrocínio"));
+        patrocinios_table = new JTable(new UsuarioTableModel(sponsor_controller.ListSponsors(evento),"Patrocinadores"));
+
+        propostas_table.addMouseListener(this);
+
+        propostas_table.setAutoCreateRowSorter(true);
+        JScrollPane propostas_scrollpane = new JScrollPane(propostas_table);
+        propostas_scrollpane.setPreferredSize(new Dimension (300, 150));
+
+        patrocinios_table.setAutoCreateRowSorter(true);
+        JScrollPane patrocinios_scrollpane = new JScrollPane(patrocinios_table);
+        patrocinios_scrollpane.setPreferredSize(new Dimension (300, 150));
+
+        panel.setPreferredSize(new Dimension (640, 640));
 
         // formatação da UI
         JPanel new_line_1 = new JPanel();
@@ -135,6 +154,9 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
         
         panel.add(presencas_scrollpane);
         panel.add(excedentes_scrollpane);
+
+        panel.add(propostas_scrollpane);
+        panel.add(patrocinios_scrollpane);
 
         panel.add(excluir_button);
 
@@ -191,12 +213,33 @@ public class ManagerEventWindow extends SecondaryWindow implements ActionListene
             else if (tipo.equals("Presenças Excedentes"))
             {
                 Usuario presenca = usuarioTableModel.getListUsuarios().get(row);
-                int n = JOptionPane.showConfirmDialog(null,"Aceitar presença excedente desse usuário?","Aceitar Presença Excedente",JOptionPane.YES_NO_OPTION);
+                int n = JOptionPane.showConfirmDialog(null,"Aceitar presença excedente desse usuário?","Aceitar Presença Excedente",JOptionPane.YES_NO_CANCEL_OPTION);
                 if (n == JOptionPane.YES_OPTION)
                 {
                     controller.AdicionaPresencaExcedente(evento, presenca);
                     usuarioTableModel.setListUsuarios(list_controller.ListPresencasExcedentes(evento));
                     ((UsuarioTableModel)presencas_table.getModel()).setListUsuarios(list_controller.ListPresencas(evento));
+                }
+                else if (n == JOptionPane.NO_OPTION)
+                {
+                    controller.RejeitaPresencaExcedente(evento, presenca);
+                    usuarioTableModel.setListUsuarios(list_controller.ListPresencasExcedentes(evento));
+                }
+            }
+            else if (tipo.equals("Propostas de Patrocínio"))
+            {
+                Usuario patrocinador = usuarioTableModel.getListUsuarios().get(row);
+                int n = JOptionPane.showConfirmDialog(null,"Aceitar proposta de patrocínio?","Aceitar Patrocínio",JOptionPane.YES_NO_CANCEL_OPTION);
+                if (n == JOptionPane.YES_OPTION)
+                {
+                    controller.AceitarPropostaPatrocinio(evento, patrocinador);
+                    usuarioTableModel.setListUsuarios(sponsor_controller.ListPotentialSponsors(evento));
+                    ((UsuarioTableModel)patrocinios_table.getModel()).setListUsuarios(sponsor_controller.ListSponsors(evento));
+                }
+                else if (n == JOptionPane.NO_OPTION)
+                {
+                    controller.RejeitarPropostaPatrocinio(evento, patrocinador);
+                    usuarioTableModel.setListUsuarios(sponsor_controller.ListPotentialSponsors(evento));
                 }
             }
         }

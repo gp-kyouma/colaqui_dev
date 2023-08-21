@@ -10,7 +10,7 @@ import controller.NotificationController;
 import model.Model;
 import model.Notificacao;
 
-public class NotificacaoPanel extends JPanel implements MouseListener {
+public class NotificationPanel extends JPanel implements MouseListener {
 
     private NotificationController controller;
 
@@ -18,14 +18,14 @@ public class NotificacaoPanel extends JPanel implements MouseListener {
     
     private JTable notif_table;
 
-    private NotificacaoTableModel tableModel;
+    private NotificationTableModel tableModel;
 
-    public NotificacaoPanel(Model model) {
+    public NotificationPanel(Model model) {
 
         controller = new NotificationController(model);
         this.model = model;
 
-        tableModel = new NotificacaoTableModel(new ArrayList<Notificacao>());
+        tableModel = new NotificationTableModel(new ArrayList<Notificacao>());
 
         notif_table = new JTable(tableModel);
 

@@ -5,20 +5,15 @@ package view;
 
 import javax.swing.table.AbstractTableModel;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import model.Notificacao;
+public class ReportTableModel extends AbstractTableModel {
+    private String colunas[] = {"Motivo da Denúncia"};
+    private ArrayList<String> denuncias;
+    private final int COLUNA_MOTIVO = 0;
 
-public class NotificacaoTableModel extends AbstractTableModel {
-
-    private String colunas[] = {"Notificação", "Data"};
-    private ArrayList<Notificacao> notifs;
-    private final int COLUNA_NOME = 0;
-    private final int COLUNA_DATA = 1;
-
-    public NotificacaoTableModel(ArrayList<Notificacao> notifs) {
-        this.notifs = notifs;
+    public ReportTableModel(ArrayList<String> denuncias) {
+        this.denuncias = denuncias;
     }
 
     // retorna se a célula é editável ou não (no nosso caso não)
@@ -30,7 +25,7 @@ public class NotificacaoTableModel extends AbstractTableModel {
     // retorna o total de itens (que virarão linhas) da nossa lista
     @Override
     public int getRowCount() {
-        return notifs.size();
+        return denuncias.size();
     }
 
     // retorna o total de colunas da tabela
@@ -49,10 +44,8 @@ public class NotificacaoTableModel extends AbstractTableModel {
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
-            case COLUNA_NOME:
+            case COLUNA_MOTIVO:
                 return String.class;
-            case COLUNA_DATA:
-                return LocalDate.class;
             default:
                 return String.class;
         }
@@ -61,26 +54,24 @@ public class NotificacaoTableModel extends AbstractTableModel {
     // preenche cada célula da tabela
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Notificacao result = this.notifs.get(rowIndex);
+        String result = this.denuncias.get(rowIndex);
 
         switch (columnIndex) {
-            case COLUNA_NOME:
-                return result.getNotificacao();
-            case COLUNA_DATA:
-                return result.getTime();
+            case COLUNA_MOTIVO:
+                return result;
         }
         return null;
     }
-
-    // atualiza tabela
-    public void setNotifs(ArrayList<Notificacao> notifs)
+    
+    public void setListDenuncias(ArrayList<String> denuncias)
     {
-        this.notifs = notifs;
+        this.denuncias = denuncias;
         fireTableDataChanged();
     }
 
-    public ArrayList<Notificacao> getNotifs()
+    public ArrayList<String> getListDenuncias()
     {
-        return notifs;
+        return denuncias;
     }
 }
+

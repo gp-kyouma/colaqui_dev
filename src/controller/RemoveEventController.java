@@ -40,6 +40,14 @@ public class RemoveEventController {
                 if (byAdmin)
                     notif_controller.AddNotification(i, "Seu evento " + evento.getNome() + " violou as normas da plataforma e foi retirado do ar.");
             }
+            if (evento.fezProposta(i.getCartao()))
+            {
+                notif_controller.AddNotification(i, "Sua proposta de patrocínio do evento " + evento.getNome() + " foi cancelada pois ele foi excluído.");
+            }
+            if (evento.isPatrocinador(i.getCartao()))
+            {
+                notif_controller.AddNotification(i, "Seu patrocínio do evento " + evento.getNome() + " foi cancelado pois ele foi excluído.");
+            }
 
             model.updateUsuarioOnList(i.getCartao(),i);
         }

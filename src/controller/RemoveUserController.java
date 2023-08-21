@@ -40,6 +40,12 @@ public class RemoveUserController {
             if (i.denunciou(usuario.getCartao()))
                 i.removeDenunciou(usuario.getCartao());
 
+            if (i.fezProposta(usuario.getCartao()))
+                i.rejeitaPropostaPatrocinio(usuario.getCartao());
+
+            if (i.isPatrocinador(usuario.getCartao()))
+                i.removePatrocinio(usuario.getCartao());
+
             model.updateEventoOnList(i.getID(),i);
         }
 
