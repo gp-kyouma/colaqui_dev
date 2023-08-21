@@ -52,9 +52,22 @@ public class UserActionsPanel extends JPanel implements ActionListener {
 
         papel_pane = new JTabbedPane();
 
-        papel_pane.add("Patrocinador", papel_patrocinador);
-        papel_pane.add("Gerente de Evento", papel_gerente);
-        papel_pane.add("Membro Acadêmico", papel_membro);
+        papel_pane.add("Patrocinar Evento", papel_patrocinador);
+        papel_pane.add("Gerenciar Meus Eventos", papel_gerente);
+        papel_pane.add("Área do Usuário", papel_membro);
+
+        // para que todas as tabs tenham o mesmo tamanho
+        JLabel patrocinio_label = new JLabel("Patrocinar Evento", JLabel.CENTER);
+        patrocinio_label.setPreferredSize(new Dimension(156, 16));
+        papel_pane.setTabComponentAt(0, patrocinio_label);
+
+        JLabel gerenciar_label = new JLabel("Gerenciar Meus Eventos", JLabel.CENTER);
+        gerenciar_label.setPreferredSize(new Dimension(156, 16));
+        papel_pane.setTabComponentAt(1, gerenciar_label);
+
+        JLabel area_usuario_label = new JLabel("Área do Usuário", JLabel.CENTER);
+        area_usuario_label.setPreferredSize(new Dimension(156, 16));
+        papel_pane.setTabComponentAt(2, area_usuario_label);
 
         papel_pane.setSelectedComponent(papel_membro);
 
@@ -118,6 +131,7 @@ public class UserActionsPanel extends JPanel implements ActionListener {
             window.updateCenterPanel("Notificações");
         }
         else if (s.equals("Sair")) {
+            papel_pane.setSelectedComponent(papel_membro);
             window.logout();
         }
     }
