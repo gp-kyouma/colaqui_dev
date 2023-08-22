@@ -29,8 +29,6 @@ public class NotificationPanel extends JPanel implements MouseListener {
 
         notif_table = new JTable(tableModel);
 
-        notif_table.setAutoCreateRowSorter(true);
-
         notif_table.addMouseListener(this);
 
         setPreferredSize(new Dimension (600, 480));
